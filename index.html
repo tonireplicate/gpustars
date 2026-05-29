@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GPUStars — AI Model Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #06060a;
+    --surface: #0e0e16;
+    --border: #1e1e2e;
+    --accent: #c8f135;
+    --accent2: #35f1c8;
+    --text: #e8e8f0;
+    --muted: #5a5a72;
+    --danger: #f13560;
+    --gold: #f1b435;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,241,53,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,241,53,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Header */
+  header {
+    padding: 48px 0 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-star {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    animation: pulse-star 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse-star {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.1) rotate(5deg); }
+  }
+
+  .logo-text {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -1px;
+  }
+
+  .logo-text span { color: var(--accent); }
+
+  .tagline {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .updated {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-align: right;
+  }
+
+  .updated .dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin-right: 6px;
+    animation: blink 2s infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+  }
+
+  /* Winner banner */
+  .winner-banner {
+    margin: 40px 0 0;
+    padding: 28px 32px;
+    background: linear-gradient(135deg, rgba(200,241,53,0.08), rgba(53,241,200,0.04));
+    border: 1px solid rgba(200,241,53,0.3);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.5s ease;
+  }
+
+  .winner-banner.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .winner-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .winner-name {
+    font-size: 22px;
+    font-weight: 700;
+    flex: 1;
+  }
+
+  .winner-name .provider-tag {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--muted);
+    margin-right: 8px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .winner-scores {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .winner-score-item {
+    text-align: center;
+  }
+
+  .winner-score-item .val {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+  }
+
+  .winner-score-item .lbl {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* Filters */
+  .filters {
+    display: flex;
+    gap: 8px;
+    margin: 32px 0 24px;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 8px 18px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(200,241,53,0.05);
+  }
+
+  /* Table */
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  thead {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+
+  th {
+    padding: 14px 16px;
+    text-align: left;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  th:hover { color: var(--accent); }
+
+  th.sort-asc::after { content: ' ↑'; color: var(--accent); }
+  th.sort-desc::after { content: ' ↓'; color: var(--accent); }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+    opacity: 0;
+    animation: fadeIn 0.4s forwards;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  tbody tr:hover { background: rgba(255,255,255,0.02); }
+  tbody tr.rank-1 { background: rgba(200,241,53,0.04); }
+
+  td {
+    padding: 14px 16px;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  .rank {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    width: 40px;
+  }
+
+  .rank-1 .rank { color: var(--accent); font-weight: 700; }
+
+  .model-name {
+    font-weight: 600;
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .provider-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .badge-deepinfra { background: rgba(53,241,200,0.1); color: var(--accent2); border: 1px solid rgba(53,241,200,0.2); }
+  .badge-together { background: rgba(241,180,53,0.1); color: var(--gold); border: 1px solid rgba(241,180,53,0.2); }
+  .badge-local { background: rgba(200,241,53,0.1); color: var(--accent); border: 1px solid rgba(200,241,53,0.2); }
+
+  .score-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 120px;
+  }
+
+  .score-bar {
+    flex: 1;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .score-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: var(--accent);
+    transition: width 0.6s ease;
+  }
+
+  .score-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    min-width: 32px;
+    text-align: right;
+  }
+
+  .price-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--accent2);
+  }
+
+  .latency-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+  }
+
+  .latency-ok { color: var(--accent); }
+  .latency-slow { color: var(--gold); }
+  .latency-fail { color: var(--danger); }
+
+  .ctx-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* Section title */
+  .section-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 40px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Local models */
+  .local-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .local-card {
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--surface);
+    opacity: 0;
+    animation: fadeIn 0.4s forwards;
+  }
+
+  .local-card:hover {
+    border-color: rgba(200,241,53,0.2);
+  }
+
+  .local-card .model { font-weight: 600; font-size: 14px; margin-bottom: 8px; }
+  .local-card .meta { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+  .local-card .free-tag {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 2px 8px;
+    background: rgba(200,241,53,0.1);
+    border: 1px solid rgba(200,241,53,0.2);
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    border-radius: 2px;
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 60px;
+    padding: 32px 0;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  footer .copy {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .error-msg {
+    padding: 40px;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    color: var(--danger);
+    font-size: 13px;
+  }
+
+  @media (max-width: 640px) {
+    .winner-banner { flex-direction: column; align-items: flex-start; }
+    .winner-scores { gap: 16px; }
+    th, td { padding: 10px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="header-inner">
+      <div>
+        <div class="logo">
+          <div class="logo-star"></div>
+          <div class="logo-text">GPU<span>Stars</span></div>
+        </div>
+        <div class="tagline" style="margin-top:8px;">AI Model Intelligence — Price · Quality · Speed</div>
+      </div>
+      <div class="updated">
+        <span class="dot"></span>
+        <span id="updated-time">Loading...</span>
+      </div>
+    </div>
+
+    <div class="winner-banner" id="winner-banner">
+      <div class="winner-label">★ Top Rated</div>
+      <div class="winner-name" id="winner-name">—</div>
+      <div class="winner-scores" id="winner-scores"></div>
+    </div>
+  </header>
+
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="DeepInfra">DeepInfra</button>
+    <button class="filter-btn" data-filter="Together.ai">Together.ai</button>
+    <button class="filter-btn" data-filter="local">Local</button>
+  </div>
+
+  <div id="cloud-section">
+    <div class="table-wrap">
+      <table id="model-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th data-col="model">Model</th>
+            <th data-col="provider">Provider</th>
+            <th data-col="composite">Score</th>
+            <th data-col="blended">Price/1M</th>
+            <th data-col="latency_s">Latency</th>
+            <th data-col="turkce_score">Turkish</th>
+            <th data-col="ctx">Context</th>
+          </tr>
+        </thead>
+        <tbody id="model-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="local-section">
+    <div class="section-title">Local Models — Mac Studio</div>
+    <div class="local-grid" id="local-grid"></div>
+  </div>
+
+  <footer>
+    <div class="copy">© 2026 GPUStars · Data updated nightly via GPU Scout</div>
+    <div class="copy" id="model-count">—</div>
+  </footer>
+</div>
+
+<script>
+let allData = { cloud: [], local: [] };
+let currentFilter = 'all';
+let sortCol = 'composite';
+let sortDir = 'desc';
+
+async function loadData() {
+  try {
+    const r = await fetch('data/report.json?v=' + Date.now());
+    const data = await r.json();
+    allData = data;
+    render(data);
+  } catch(e) {
+    document.getElementById('model-tbody').innerHTML =
+      '<tr><td colspan="8"><div class="error-msg">Failed to load data: ' + e.message + '</div></td></tr>';
+  }
+}
+
+function formatCtx(ctx) {
+  if (!ctx) return '—';
+  if (ctx >= 1000000) return (ctx/1000000).toFixed(0) + 'M';
+  if (ctx >= 1000) return (ctx/1000).toFixed(0) + 'K';
+  return ctx;
+}
+
+function latencyClass(s) {
+  if (s == null) return 'latency-fail';
+  if (s <= 1.5) return 'latency-ok';
+  if (s <= 3.0) return 'latency-slow';
+  return 'latency-fail';
+}
+
+function modelShortName(full) {
+  const parts = full.split('/');
+  return parts[parts.length - 1];
+}
+
+function providerBadge(p) {
+  if (p === 'DeepInfra') return 'badge-deepinfra';
+  if (p === 'Together.ai') return 'badge-together';
+  return 'badge-local';
+}
+
+function render(data) {
+  // Updated time
+  if (data.generated_at) {
+    const d = new Date(data.generated_at);
+    document.getElementById('updated-time').textContent =
+      'Updated ' + d.toLocaleDateString('en-GB', {day:'2-digit',month:'short',year:'numeric'}) +
+      ' ' + d.toLocaleTimeString('en-GB', {hour:'2-digit',minute:'2-digit'});
+  }
+
+  // Winner
+  const best = data.best_cloud;
+  if (best) {
+    document.getElementById('winner-name').innerHTML =
+      `<span class="provider-tag">${best.provider}</span>${modelShortName(best.model)}`;
+    document.getElementById('winner-scores').innerHTML = `
+      <div class="winner-score-item">
+        <div class="val">${best.composite?.toFixed(2) ?? '—'}</div>
+        <div class="lbl">Composite</div>
+      </div>
+      <div class="winner-score-item">
+        <div class="val">$${best.blended?.toFixed(3) ?? '—'}</div>
+        <div class="lbl">Per 1M tok</div>
+      </div>
+      <div class="winner-score-item">
+        <div class="val">${best.latency_s != null ? best.latency_s + 's' : '—'}</div>
+        <div class="lbl">Latency</div>
+      </div>
+      <div class="winner-score-item">
+        <div class="val">${best.turkce_score ?? '—'}</div>
+        <div class="lbl">Turkish</div>
+      </div>
+    `;
+    setTimeout(() => document.getElementById('winner-banner').classList.add('visible'), 100);
+  }
+
+  renderTable(data.cloud || []);
+  renderLocal(data.local || []);
+
+  const total = (data.cloud?.length || 0) + (data.local?.length || 0);
+  document.getElementById('model-count').textContent = total + ' models tracked';
+}
+
+function renderTable(cloud) {
+  let filtered = cloud;
+  if (currentFilter !== 'all' && currentFilter !== 'local') {
+    filtered = cloud.filter(m => m.provider === currentFilter);
+  }
+
+  // Sort
+  filtered = [...filtered].sort((a, b) => {
+    let av = a[sortCol] ?? -Infinity;
+    let bv = b[sortCol] ?? -Infinity;
+    if (typeof av === 'string') av = av.toLowerCase();
+    if (typeof bv === 'string') bv = bv.toLowerCase();
+    if (av < bv) return sortDir === 'asc' ? -1 : 1;
+    if (av > bv) return sortDir === 'asc' ? 1 : -1;
+    return 0;
+  });
+
+  const maxScore = Math.max(...filtered.map(m => m.composite || 0));
+  const tbody = document.getElementById('model-tbody');
+
+  tbody.innerHTML = filtered.map((m, i) => {
+    const barPct = maxScore > 0 ? ((m.composite || 0) / maxScore * 100).toFixed(1) : 0;
+    const latStr = m.latency_s != null ? m.latency_s + 's' : (m.latency_status || '—');
+    const lClass = latencyClass(m.latency_s);
+    const rowClass = i === 0 ? 'rank-1' : '';
+    const delay = (i * 0.05).toFixed(2);
+
+    return `<tr class="${rowClass}" style="animation-delay:${delay}s">
+      <td class="rank">${i === 0 ? '★' : i + 1}</td>
+      <td class="model-name" title="${m.model}">${modelShortName(m.model)}</td>
+      <td><span class="provider-badge ${providerBadge(m.provider)}">${m.provider}</span></td>
+      <td>
+        <div class="score-bar-wrap">
+          <div class="score-bar"><div class="score-bar-fill" style="width:${barPct}%"></div></div>
+          <span class="score-val">${(m.composite || 0).toFixed(2)}</span>
+        </div>
+      </td>
+      <td class="price-val">${m.blended > 0 ? '$' + m.blended.toFixed(3) : 'Free'}</td>
+      <td class="latency-val ${lClass}">${latStr}</td>
+      <td class="score-val">${m.turkce_score ?? '—'}</td>
+      <td class="ctx-val">${formatCtx(m.ctx)}</td>
+    </tr>`;
+  }).join('');
+
+  // Sort indicators
+  document.querySelectorAll('th[data-col]').forEach(th => {
+    th.classList.remove('sort-asc', 'sort-desc');
+    if (th.dataset.col === sortCol) {
+      th.classList.add(sortDir === 'asc' ? 'sort-asc' : 'sort-desc');
+    }
+  });
+}
+
+function renderLocal(local) {
+  if (currentFilter !== 'all' && currentFilter !== 'local') {
+    document.getElementById('local-section').style.display = 'none';
+    return;
+  }
+  document.getElementById('local-section').style.display = '';
+  const grid = document.getElementById('local-grid');
+  grid.innerHTML = local.map((m, i) => `
+    <div class="local-card" style="animation-delay:${(i*0.08).toFixed(2)}s">
+      <div class="model">${modelShortName(m.model)}</div>
+      <div class="meta">${m.size_gb ? m.size_gb + ' GB' : ''} · ${formatCtx(m.ctx)} ctx</div>
+      <span class="free-tag">FREE · PRIVATE</span>
+    </div>
+  `).join('');
+}
+
+// Filter buttons
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    renderTable(allData.cloud || []);
+    renderLocal(allData.local || []);
+  });
+});
+
+// Sort
+document.querySelectorAll('th[data-col]').forEach(th => {
+  th.addEventListener('click', () => {
+    const col = th.dataset.col;
+    if (sortCol === col) {
+      sortDir = sortDir === 'desc' ? 'asc' : 'desc';
+    } else {
+      sortCol = col;
+      sortDir = 'desc';
+    }
+    renderTable(allData.cloud || []);
+  });
+});
+
+loadData();
+</script>
+</body>
+</html>
