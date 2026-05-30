@@ -29,7 +29,6 @@
     overflow-x: hidden;
   }
 
-  /* Grid background */
   body::before {
     content: '';
     position: fixed;
@@ -50,7 +49,6 @@
     z-index: 1;
   }
 
-  /* Header */
   header {
     padding: 48px 0 32px;
     border-bottom: 1px solid var(--border);
@@ -64,15 +62,10 @@
     flex-wrap: wrap;
   }
 
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
+  .logo { display: flex; align-items: center; gap: 12px; }
 
   .logo-star {
-    width: 40px;
-    height: 40px;
+    width: 40px; height: 40px;
     background: var(--accent);
     clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
     animation: pulse-star 3s ease-in-out infinite;
@@ -83,37 +76,21 @@
     50% { transform: scale(1.1) rotate(5deg); }
   }
 
-  .logo-text {
-    font-size: 28px;
-    font-weight: 800;
-    letter-spacing: -1px;
-  }
-
+  .logo-text { font-size: 28px; font-weight: 800; letter-spacing: -1px; }
   .logo-text span { color: var(--accent); }
 
   .tagline {
     font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    color: var(--muted);
-    letter-spacing: 2px;
-    text-transform: uppercase;
+    font-size: 12px; color: var(--muted);
+    letter-spacing: 2px; text-transform: uppercase;
   }
 
-  .updated {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    text-align: right;
-  }
+  .updated { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); text-align: right; }
 
   .updated .dot {
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    background: var(--accent);
-    border-radius: 50%;
-    margin-right: 6px;
-    animation: blink 2s infinite;
+    display: inline-block; width: 6px; height: 6px;
+    background: var(--accent); border-radius: 50%;
+    margin-right: 6px; animation: blink 2s infinite;
   }
 
   @keyframes blink {
@@ -121,313 +98,254 @@
     50% { opacity: 0.2; }
   }
 
-  /* Winner banner */
   .winner-banner {
-    margin: 40px 0 0;
-    padding: 28px 32px;
+    margin: 40px 0 0; padding: 28px 32px;
     background: linear-gradient(135deg, rgba(200,241,53,0.08), rgba(53,241,200,0.04));
-    border: 1px solid rgba(200,241,53,0.3);
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    gap: 32px;
-    flex-wrap: wrap;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: all 0.5s ease;
+    border: 1px solid rgba(200,241,53,0.3); border-radius: 4px;
+    display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
+    opacity: 0; transform: translateY(10px); transition: all 0.5s ease;
   }
 
-  .winner-banner.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .winner-banner.visible { opacity: 1; transform: translateY(0); }
 
   .winner-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: var(--accent);
-    text-transform: uppercase;
-    white-space: nowrap;
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 3px; color: var(--accent);
+    text-transform: uppercase; white-space: nowrap;
   }
 
-  .winner-name {
-    font-size: 22px;
-    font-weight: 700;
-    flex: 1;
-  }
+  .winner-name { font-size: 22px; font-weight: 700; flex: 1; }
+  .winner-name .provider-tag { font-size: 12px; font-weight: 400; color: var(--muted); margin-right: 8px; font-family: 'DM Mono', monospace; }
 
-  .winner-name .provider-tag {
-    font-size: 12px;
-    font-weight: 400;
-    color: var(--muted);
-    margin-right: 8px;
-    font-family: 'DM Mono', monospace;
-  }
+  .winner-scores { display: flex; gap: 24px; flex-wrap: wrap; }
+  .winner-score-item { text-align: center; }
+  .winner-score-item .val { font-size: 24px; font-weight: 800; color: var(--accent); font-family: 'DM Mono', monospace; }
+  .winner-score-item .lbl { font-size: 10px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; font-family: 'DM Mono', monospace; }
 
-  .winner-scores {
-    display: flex;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-
-  .winner-score-item {
-    text-align: center;
-  }
-
-  .winner-score-item .val {
-    font-size: 24px;
-    font-weight: 800;
-    color: var(--accent);
-    font-family: 'DM Mono', monospace;
-  }
-
-  .winner-score-item .lbl {
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-family: 'DM Mono', monospace;
-  }
-
-  /* Filters */
-  .filters {
-    display: flex;
-    gap: 8px;
-    margin: 32px 0 24px;
-    flex-wrap: wrap;
-  }
+  .filters { display: flex; gap: 8px; margin: 32px 0 24px; flex-wrap: wrap; }
 
   .filter-btn {
-    padding: 8px 18px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--muted);
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-radius: 2px;
-    transition: all 0.2s;
+    padding: 8px 18px; border: 1px solid var(--border);
+    background: transparent; color: var(--muted);
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    letter-spacing: 1px; text-transform: uppercase;
+    cursor: pointer; border-radius: 2px; transition: all 0.2s;
   }
 
   .filter-btn:hover, .filter-btn.active {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: rgba(200,241,53,0.05);
+    border-color: var(--accent); color: var(--accent); background: rgba(200,241,53,0.05);
   }
 
-  /* Table */
-  .table-wrap {
-    overflow-x: auto;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-  }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 4px; }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
-  }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
 
-  thead {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-  }
+  thead { background: var(--surface); border-bottom: 1px solid var(--border); }
 
   th {
-    padding: 14px 16px;
-    text-align: left;
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--muted);
-    cursor: pointer;
-    white-space: nowrap;
-    user-select: none;
+    padding: 14px 16px; text-align: left;
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted); cursor: pointer; white-space: nowrap; user-select: none;
   }
 
   th:hover { color: var(--accent); }
-
   th.sort-asc::after { content: ' ↑'; color: var(--accent); }
   th.sort-desc::after { content: ' ↓'; color: var(--accent); }
 
   tbody tr {
     border-bottom: 1px solid var(--border);
-    transition: background 0.15s;
-    opacity: 0;
+    transition: background 0.15s; opacity: 0;
     animation: fadeIn 0.4s forwards;
   }
 
-  @keyframes fadeIn {
-    to { opacity: 1; }
-  }
+  @keyframes fadeIn { to { opacity: 1; } }
 
   tbody tr:hover { background: rgba(255,255,255,0.02); }
   tbody tr.rank-1 { background: rgba(200,241,53,0.04); }
 
-  td {
-    padding: 14px 16px;
-    vertical-align: middle;
-    white-space: nowrap;
-  }
+  td { padding: 14px 16px; vertical-align: middle; white-space: nowrap; }
 
-  .rank {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    width: 40px;
-  }
-
+  .rank { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); width: 40px; }
   .rank-1 .rank { color: var(--accent); font-weight: 700; }
 
-  .model-name {
-    font-weight: 600;
-    max-width: 220px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+  .model-name { font-weight: 600; max-width: 220px; overflow: hidden; text-overflow: ellipsis; }
 
   .provider-badge {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 2px;
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    display: inline-block; padding: 2px 8px; border-radius: 2px;
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 1px; text-transform: uppercase;
   }
 
   .badge-deepinfra { background: rgba(53,241,200,0.1); color: var(--accent2); border: 1px solid rgba(53,241,200,0.2); }
   .badge-together { background: rgba(241,180,53,0.1); color: var(--gold); border: 1px solid rgba(241,180,53,0.2); }
   .badge-local { background: rgba(200,241,53,0.1); color: var(--accent); border: 1px solid rgba(200,241,53,0.2); }
 
-  .score-bar-wrap {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 120px;
-  }
-
-  .score-bar {
-    flex: 1;
-    height: 4px;
-    background: var(--border);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-
-  .score-bar-fill {
-    height: 100%;
-    border-radius: 2px;
-    background: var(--accent);
-    transition: width 0.6s ease;
-  }
-
-  .score-val {
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    font-weight: 500;
-    min-width: 32px;
-    text-align: right;
-  }
-
-  .price-val {
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    color: var(--accent2);
-  }
-
-  .latency-val {
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-  }
-
+  .score-bar-wrap { display: flex; align-items: center; gap: 10px; min-width: 120px; }
+  .score-bar { flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .score-bar-fill { height: 100%; border-radius: 2px; background: var(--accent); transition: width 0.6s ease; }
+  .score-val { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; min-width: 32px; text-align: right; }
+  .price-val { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--accent2); }
+  .latency-val { font-family: 'DM Mono', monospace; font-size: 12px; }
   .latency-ok { color: var(--accent); }
   .latency-slow { color: var(--gold); }
   .latency-fail { color: var(--danger); }
+  .ctx-val { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
 
-  .ctx-val {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-  }
-
-  /* Section title */
   .section-title {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin: 40px 0 16px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--muted); margin: 40px 0 16px;
+    padding-bottom: 8px; border-bottom: 1px solid var(--border);
   }
 
   /* Local models */
   .local-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 12px;
-    margin-bottom: 40px;
+    gap: 12px; margin-bottom: 40px;
   }
 
   .local-card {
-    padding: 20px;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    background: var(--surface);
-    opacity: 0;
-    animation: fadeIn 0.4s forwards;
+    padding: 20px; border: 1px solid var(--border);
+    border-radius: 4px; background: var(--surface);
+    opacity: 0; animation: fadeIn 0.4s forwards;
+    transition: border-color 0.2s;
   }
 
-  .local-card:hover {
-    border-color: rgba(200,241,53,0.2);
-  }
-
+  .local-card:hover { border-color: rgba(200,241,53,0.2); }
   .local-card .model { font-weight: 600; font-size: 14px; margin-bottom: 8px; }
   .local-card .meta { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
-  .local-card .free-tag {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 2px 8px;
-    background: rgba(200,241,53,0.1);
+
+  .local-card .private-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 10px; padding: 3px 10px;
+    background: rgba(200,241,53,0.08);
     border: 1px solid rgba(200,241,53,0.2);
     color: var(--accent);
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 1px;
-    border-radius: 2px;
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 1px; border-radius: 2px;
   }
+
+  .local-card .private-tag::before {
+    content: '🔒';
+    font-size: 10px;
+  }
+
+  /* Provider section grid */
+  .provider-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+
+  /* Affiliate card */
+  .aff-card {
+    padding: 22px; border-radius: 4px;
+    display: flex; flex-direction: column;
+    transition: all 0.2s; cursor: pointer;
+    position: relative; overflow: hidden;
+    text-decoration: none;
+  }
+
+  .aff-card-accent {
+    border: 1px solid rgba(200,241,53,0.3);
+    background: rgba(200,241,53,0.03);
+  }
+  .aff-card-accent:hover {
+    border-color: rgba(200,241,53,0.6);
+    background: rgba(200,241,53,0.07);
+  }
+
+  .aff-card-cyan {
+    border: 1px solid rgba(53,241,200,0.25);
+    background: rgba(53,241,200,0.03);
+  }
+  .aff-card-cyan:hover {
+    border-color: rgba(53,241,200,0.5);
+    background: rgba(53,241,200,0.07);
+  }
+
+  .aff-card-gold {
+    border: 1px solid rgba(241,180,53,0.25);
+    background: rgba(241,180,53,0.03);
+  }
+  .aff-card-gold:hover {
+    border-color: rgba(241,180,53,0.5);
+    background: rgba(241,180,53,0.07);
+  }
+
+  .aff-card-muted {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    cursor: default;
+  }
+
+  .card-badge {
+    position: absolute; top: 12px; right: 12px;
+    font-family: 'DM Mono', monospace; font-size: 9px;
+    letter-spacing: 2px; padding: 3px 8px; border-radius: 2px;
+  }
+
+  .badge-affiliate {
+    background: rgba(200,241,53,0.15); border: 1px solid rgba(200,241,53,0.3); color: var(--accent);
+  }
+  .badge-partner {
+    background: rgba(53,241,200,0.1); border: 1px solid rgba(53,241,200,0.2); color: var(--accent2);
+  }
+  .badge-enterprise {
+    background: rgba(241,180,53,0.1); border: 1px solid rgba(241,180,53,0.2); color: var(--gold);
+  }
+  .badge-hyperscaler {
+    background: rgba(241,53,96,0.1); border: 1px solid rgba(241,53,96,0.2); color: var(--danger);
+  }
+  .badge-used {
+    background: rgba(200,241,53,0.15); border: 1px solid rgba(200,241,53,0.3); color: var(--accent);
+  }
+
+  .card-name { font-size: 19px; font-weight: 700; margin-bottom: 3px; margin-top: 8px; }
+  .card-sub { font-family: 'DM Mono', monospace; font-size: 10px; opacity: 0.6; margin-bottom: 10px; }
+  .card-desc { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); margin-bottom: 14px; flex: 1; }
+
+  .card-stats { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: auto; }
+  .card-stat { text-align: center; }
+  .card-stat .sv { font-family: 'DM Mono', monospace; font-size: 17px; font-weight: 700; color: var(--text); }
+  .card-stat .sl { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 1px; }
+
+  .card-cta {
+    margin-top: 14px; font-family: 'DM Mono', monospace;
+    font-size: 11px;
+  }
+  .cta-accent { color: var(--accent); }
+  .cta-cyan { color: var(--accent2); }
+  .cta-gold { color: var(--gold); }
+  .cta-muted { color: var(--muted); opacity: 0.6; }
 
   /* Footer */
   footer {
-    margin-top: 60px;
-    padding: 32px 0;
+    margin-top: 60px; padding: 32px 0;
     border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
+    display: flex; justify-content: space-between;
+    align-items: center; flex-wrap: wrap; gap: 16px;
   }
 
-  footer .copy {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
+  .footer-powered {
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    display: flex; align-items: center; gap: 6px;
   }
 
-  .error-msg {
-    padding: 40px;
-    text-align: center;
-    font-family: 'DM Mono', monospace;
-    color: var(--danger);
-    font-size: 13px;
+  .footer-powered .pw-label { color: var(--muted); }
+
+  .footer-powered .pw-btsn {
+    background: linear-gradient(90deg, var(--accent), var(--accent2), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; font-weight: 700; letter-spacing: 2px;
   }
+
+  footer .copy { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+
+  .error-msg { padding: 40px; text-align: center; font-family: 'DM Mono', monospace; color: var(--danger); font-size: 13px; }
 
   @media (max-width: 640px) {
     .winner-banner { flex-direction: column; align-items: flex-start; }
@@ -489,110 +407,274 @@
   </div>
 
   <div id="local-section">
-    <div class="section-title">Local Models — Mac Studio</div>
+    <div class="section-title">Local Models</div>
     <div class="local-grid" id="local-grid"></div>
   </div>
 
-  <!-- Infrastructure Partners -->
-  <div id="partners-section" style="margin: 40px 0;">
-    <div class="section-title">Infrastructure Tested by GPUStars</div>
-    <p style="font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:20px;">
-      We run our own infrastructure on these providers. No sponsorship — just what works.
-    </p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;align-items:stretch;">
+  <!-- ═══════════════════════════════════════════ -->
+  <!--   AI INFERENCE PROVIDERS                   -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section-title" style="margin-top:48px;">AI Inference Providers</div>
+  <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:18px;">
+    Affiliate links — we earn a commission when you sign up. Prices tracked nightly by GPU Scout.
+  </p>
+  <div class="provider-grid">
 
-      <!-- Alastyr Card -->
-      <a href="/go/hosting" target="_blank" rel="noopener" style="text-decoration:none;display:flex;">
-        <div style="
-          flex:1;padding:24px;
-          border:1px solid rgba(200,241,53,0.35);
-          border-radius:4px;
-          background:rgba(200,241,53,0.04);
-          transition:all 0.2s;cursor:pointer;
-          position:relative;overflow:hidden;
-          display:flex;flex-direction:column;
-        " onmouseover="this.style.background='rgba(200,241,53,0.08)';this.style.borderColor='rgba(200,241,53,0.6)'"
-           onmouseout="this.style.background='rgba(200,241,53,0.04)';this.style.borderColor='rgba(200,241,53,0.35)'">
-          <div style="position:absolute;top:12px;right:12px;
-            background:rgba(200,241,53,0.15);border:1px solid rgba(200,241,53,0.3);
-            color:var(--accent);font-family:'DM Mono',monospace;
-            font-size:9px;letter-spacing:2px;padding:3px 8px;border-radius:2px;">
-            USED BY GPUSTARS
-          </div>
-          <div style="font-size:20px;font-weight:700;color:var(--accent);margin-bottom:4px;">Alastyr</div>
-          <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);opacity:0.7;margin-bottom:12px;">Web Solutions</div>
-          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:16px;">
-            Domain · Hosting · SSL · Turkey-based
-          </div>
-          <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:auto;">
-            <div style="text-align:center;">
-              <div style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--text);">99.9%</div>
-              <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;">UPTIME</div>
-            </div>
-            <div style="text-align:center;">
-              <div style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--text);">2002</div>
-              <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;">FOUNDED</div>
-            </div>
-            <div style="text-align:center;">
-              <div style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--text);">24/7</div>
-              <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;">SUPPORT</div>
-            </div>
-          </div>
-          <div style="margin-top:16px;font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);">
-            Get started → gpustars.com/go/hosting
-          </div>
-        </div>
-      </a>
-
-      <!-- 1ADATA Card -->
-      <div style="display:flex;">
-        <div style="
-          flex:1;padding:24px;
-          border:1px solid rgba(200,241,53,0.35);
-          border-radius:4px;
-          background:rgba(200,241,53,0.04);
-          transition:all 0.2s;
-          position:relative;overflow:hidden;
-          display:flex;flex-direction:column;
-        ">
-          <div style="position:absolute;top:12px;right:12px;
-            background:rgba(200,241,53,0.15);border:1px solid rgba(200,241,53,0.3);
-            color:var(--accent);font-family:'DM Mono',monospace;
-            font-size:9px;letter-spacing:2px;padding:3px 8px;border-radius:2px;">
-            ECOSYSTEM PARTNER
-          </div>
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px;">
-            <img src="assets/1adata_logo.jpg" alt="1ADATA Logo" style="width:36px;height:36px;object-fit:contain;border-radius:3px;background:#fff;padding:2px;"/>
-            <div style="font-size:20px;font-weight:700;color:var(--accent);letter-spacing:0;">1ADATA</div>
-          </div>
-          <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);opacity:0.7;margin-bottom:12px;">Enables Digital Security</div>
-          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:16px;">
-            Security · Recovery · Data Infrastructure · Turkey
-          </div>
-          <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:auto;">
-            <div style="text-align:center;">
-              <div style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--text);">256</div>
-              <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;">BIT ENC</div>
-            </div>
-            <div style="text-align:center;">
-              <div style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--text);">24/7</div>
-              <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;">MONITORING</div>
-            </div>
-            <div style="text-align:center;">
-              <div style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--text);">1A</div>
-              <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;">GRADE</div>
-            </div>
-          </div>
-          <div style="margin-top:16px;font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);opacity:0.5;">
-            1ADATA · Enables Digital Security
-          </div>
-        </div>
+    <!-- Together.ai -->
+    <a href="https://api.together.xyz/signup?referral=gpustars" target="_blank" rel="noopener" class="aff-card aff-card-gold">
+      <span class="card-badge badge-affiliate">AFFILIATE</span>
+      <div class="card-name" style="color:var(--gold);">Together.ai</div>
+      <div class="card-sub">Open-Source Inference API</div>
+      <div class="card-desc">70+ open models · Llama, Mistral, Qwen · Competitive pricing · Fast inference</div>
+      <div class="card-stats">
+        <div class="card-stat"><div class="sv" style="color:var(--gold);">$0.18</div><div class="sl">PER 1M TOK</div></div>
+        <div class="card-stat"><div class="sv" style="color:var(--gold);">70+</div><div class="sl">MODELS</div></div>
+        <div class="card-stat"><div class="sv" style="color:var(--gold);">API</div><div class="sl">CREDITS</div></div>
       </div>
+      <div class="card-cta cta-gold">Sign up → get free credits ↗</div>
+    </a>
 
+    <!-- DeepInfra -->
+    <a href="https://deepinfra.com/?referral=gpustars" target="_blank" rel="noopener" class="aff-card aff-card-cyan">
+      <span class="card-badge badge-affiliate">AFFILIATE</span>
+      <div class="card-name" style="color:var(--accent2);">DeepInfra</div>
+      <div class="card-sub">Serverless Inference</div>
+      <div class="card-desc">Pay-per-token · No minimums · OpenAI-compatible API · 150+ models available</div>
+      <div class="card-stats">
+        <div class="card-stat"><div class="sv" style="color:var(--accent2);">$0.07</div><div class="sl">PER 1M TOK</div></div>
+        <div class="card-stat"><div class="sv" style="color:var(--accent2);">150+</div><div class="sl">MODELS</div></div>
+        <div class="card-stat"><div class="sv" style="color:var(--accent2);">$0</div><div class="sl">MINIMUM</div></div>
+      </div>
+      <div class="card-cta cta-cyan">Start free → no credit card ↗</div>
+    </a>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--   GPU CLOUD — STARTUP / SME                -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section-title">GPU Cloud — Startup &amp; SME</div>
+  <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:18px;">
+    On-demand GPUs from $0.20/hr. Affiliate links — we earn when you sign up.
+  </p>
+  <div class="provider-grid">
+
+    <!-- RunPod -->
+    <a href="https://runpod.io/?ref=gpustars" target="_blank" rel="noopener" class="aff-card aff-card-accent">
+      <span class="card-badge badge-affiliate">AFFILIATE · 10%</span>
+      <div class="card-name" style="color:var(--accent);">RunPod</div>
+      <div class="card-sub">GPU Cloud & Serverless</div>
+      <div class="card-desc">H100 · A100 · RTX 4090 · Serverless endpoints · Persistent storage · Pod templates</div>
+      <div class="card-stats">
+        <div class="card-stat"><div class="sv">$0.74</div><div class="sl">H100/HR</div></div>
+        <div class="card-stat"><div class="sv">10%</div><div class="sl">COMMISSION</div></div>
+        <div class="card-stat"><div class="sv">6mo</div><div class="sl">COOKIE</div></div>
+      </div>
+      <div class="card-cta cta-accent">Deploy GPU → runpod.io ↗</div>
+    </a>
+
+    <!-- Vast.ai -->
+    <a href="https://vast.ai/?ref=gpustars" target="_blank" rel="noopener" class="aff-card aff-card-cyan">
+      <span class="card-badge badge-affiliate">AFFILIATE</span>
+      <div class="card-name" style="color:var(--accent2);">Vast.ai</div>
+      <div class="card-sub">GPU Marketplace</div>
+      <div class="card-desc">Cheapest spot GPUs · Community hosts · H100 from $1.99/hr · Docker-native · Interruptible</div>
+      <div class="card-stats">
+        <div class="card-stat"><div class="sv" style="color:var(--accent2);">$0.20</div><div class="sl">FROM/HR</div></div>
+        <div class="card-stat"><div class="sv" style="color:var(--accent2);">500+</div><div class="sl">GPU TYPES</div></div>
+        <div class="card-stat"><div class="sv" style="color:var(--accent2);">SPOT</div><div class="sl">PRICING</div></div>
+      </div>
+      <div class="card-cta cta-cyan">Browse GPUs → vast.ai ↗</div>
+    </a>
+
+    <!-- Lambda Labs -->
+    <a href="https://lambdalabs.com/?ref=gpustars" target="_blank" rel="noopener" class="aff-card aff-card-gold">
+      <span class="card-badge badge-affiliate">AFFILIATE</span>
+      <div class="card-name" style="color:var(--gold);">Lambda Labs</div>
+      <div class="card-sub">GPU Cloud for ML</div>
+      <div class="card-desc">H100 clusters · On-demand & reserved · Pre-installed ML stack · Jupyter · SSH access</div>
+      <div class="card-stats">
+        <div class="card-stat"><div class="sv" style="color:var(--gold);">$1.99</div><div class="sl">H100/HR</div></div>
+        <div class="card-stat"><div class="sv" style="color:var(--gold);">8×</div><div class="sl">MAX GPUs</div></div>
+        <div class="card-stat"><div class="sv" style="color:var(--gold);">SSH</div><div class="sl">ACCESS</div></div>
+      </div>
+      <div class="card-cta cta-gold">Launch instance → lambdalabs.com ↗</div>
+    </a>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--   ENTERPRISE GPU CLOUD                     -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section-title">Enterprise GPU Cloud</div>
+  <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:18px;">
+    Dedicated clusters · InfiniBand fabric · SLA-backed · Direct sales only.
+  </p>
+  <div class="provider-grid">
+
+    <!-- CoreWeave -->
+    <a href="https://coreweave.com" target="_blank" rel="noopener" class="aff-card aff-card-muted">
+      <span class="card-badge badge-enterprise">ENTERPRISE</span>
+      <div class="card-name" style="color:var(--text);">CoreWeave</div>
+      <div class="card-sub">GPU-Native Cloud</div>
+      <div class="card-desc">H100 · B200 · InfiniBand · 256+ GPU clusters · Kubernetes-native · Low latency fabric</div>
+      <div class="card-stats">
+        <div class="card-stat"><div class="sv">256+</div><div class="sl">GPU/CLUSTER</div></div>
+        <div class="card-stat"><div class="sv">H100</div><div class="sl">B200</div></div>
+        <div class="card-stat"><div class="sv">IB</div><div class="sl">FABRIC</div></div>
+      </div>
+      <div class="card-cta cta-muted">Contact sales → coreweave.com</div>
+    </a>
+
+    <!-- Crusoe -->
+    <a href="https://crusoecloud.com" target="_blank" rel="noopener" class="aff-card aff-card-muted">
+      <span class="card-badge badge-enterprise">ENTERPRISE</span>
+      <div class="card-name" style="color:var(--text);">Crusoe</div>
+      <div class="card-sub">Clean Energy GPU Cloud</div>
+      <div class="card-desc">H100 · A100 · MI300X · Zero egress fee · Stranded energy powered · HIPAA-ready</div>
+      <div class="card-stats">
+        <div class="card-stat"><div class="sv">$0</div><div class="sl">EGRESS</div></div>
+        <div class="card-stat"><div class="sv">MI300X</div><div class="sl">AMD GPU</div></div>
+        <div class="card-stat"><div class="sv">CO₂</div><div class="sl">REDUCED</div></div>
+      </div>
+      <div class="card-cta cta-muted">Contact sales → crusoecloud.com</div>
+    </a>
+
+    <!-- Modal Labs -->
+    <a href="https://modal.com" target="_blank" rel="noopener" class="aff-card aff-card-muted">
+      <span class="card-badge badge-enterprise">DEVELOPER</span>
+      <div class="card-name" style="color:var(--text);">Modal Labs</div>
+      <div class="card-sub">Serverless GPU Platform</div>
+      <div class="card-desc">Python-native · Per-second billing · Cold start &lt;1s · Instant scale-out · GPU functions</div>
+      <div class="card-stats">
+        <div class="card-stat"><div class="sv">1s</div><div class="sl">COLD START</div></div>
+        <div class="card-stat"><div class="sv">$/s</div><div class="sl">BILLING</div></div>
+        <div class="card-stat"><div class="sv">Py</div><div class="sl">SDK</div></div>
+      </div>
+      <div class="card-cta cta-muted">Get started → modal.com</div>
+    </a>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--   HYPERSCALERS                             -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section-title">Hyperscalers</div>
+  <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:18px;">
+    Global infrastructure · Enterprise SLA · Compliance frameworks · Contact sales for GPU clusters.
+  </p>
+  <div class="provider-grid">
+
+    <!-- AWS -->
+    <a href="https://aws.amazon.com/ec2/instance-types/p5/" target="_blank" rel="noopener" class="aff-card aff-card-muted">
+      <span class="card-badge badge-hyperscaler">HYPERSCALER</span>
+      <div class="card-name" style="color:var(--text);">AWS (P5)</div>
+      <div class="card-sub">Amazon Web Services</div>
+      <div class="card-desc">H100 · UltraCluster · HIPAA · SOC2 · SageMaker AI · Broadest cloud ecosystem</div>
+      <div class="card-stats">
+        <div class="card-stat"><div class="sv">H100</div><div class="sl">GPU</div></div>
+        <div class="card-stat"><div class="sv">SOC2</div><div class="sl">COMPLIANT</div></div>
+        <div class="card-stat"><div class="sv">UZ</div><div class="sl">ULTRACLUSTER</div></div>
+      </div>
+      <div class="card-cta cta-muted">aws.amazon.com/ec2/p5</div>
+    </a>
+
+    <!-- GCP -->
+    <a href="https://cloud.google.com/gpu" target="_blank" rel="noopener" class="aff-card aff-card-muted">
+      <span class="card-badge badge-hyperscaler">HYPERSCALER</span>
+      <div class="card-name" style="color:var(--text);">Google Cloud</div>
+      <div class="card-sub">GCP — AI Infrastructure</div>
+      <div class="card-desc">H100 · TPU v5 · Vertex AI · MLOps integration · Global backbone · Carbon-neutral</div>
+      <div class="card-stats">
+        <div class="card-stat"><div class="sv">TPU</div><div class="sl">V5P</div></div>
+        <div class="card-stat"><div class="sv">H100</div><div class="sl">A3 VMs</div></div>
+        <div class="card-stat"><div class="sv">GKE</div><div class="sl">NATIVE</div></div>
+      </div>
+      <div class="card-cta cta-muted">cloud.google.com/gpu</div>
+    </a>
+
+    <!-- Azure -->
+    <a href="https://azure.microsoft.com/products/virtual-machines/nd-series" target="_blank" rel="noopener" class="aff-card aff-card-muted">
+      <span class="card-badge badge-hyperscaler">HYPERSCALER</span>
+      <div class="card-name" style="color:var(--text);">Azure</div>
+      <div class="card-sub">Microsoft Azure ND-Series</div>
+      <div class="card-desc">H100 · Hybrid cloud · Microsoft ecosystem · Active Directory · OpenAI partnership</div>
+      <div class="card-stats">
+        <div class="card-stat"><div class="sv">H100</div><div class="sl">ND-SERIES</div></div>
+        <div class="card-stat"><div class="sv">AAD</div><div class="sl">IDENTITY</div></div>
+        <div class="card-stat"><div class="sv">AOAI</div><div class="sl">PARTNER</div></div>
+      </div>
+      <div class="card-cta cta-muted">azure.microsoft.com</div>
+    </a>
+
+    <!-- Oracle -->
+    <a href="https://www.oracle.com/cloud/compute/gpu/" target="_blank" rel="noopener" class="aff-card aff-card-muted">
+      <span class="card-badge badge-hyperscaler">HYPERSCALER</span>
+      <div class="card-name" style="color:var(--text);">Oracle Cloud</div>
+      <div class="card-sub">OCI — DGX Cloud</div>
+      <div class="card-desc">H100 · DGX Cloud · Cheapest hyperscaler H100 · Zero egress · RDMA networking</div>
+      <div class="card-stats">
+        <div class="card-stat"><div class="sv">$2.95</div><div class="sl">H100/HR</div></div>
+        <div class="card-stat"><div class="sv">$0</div><div class="sl">EGRESS</div></div>
+        <div class="card-stat"><div class="sv">DGX</div><div class="sl">CLOUD</div></div>
+      </div>
+      <div class="card-cta cta-muted">oracle.com/cloud/gpu</div>
+    </a>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--   INFRASTRUCTURE PARTNERS                  -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section-title">Infrastructure Partners</div>
+  <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:18px;">
+    We run our own infrastructure on these providers. No sponsorship — just what works.
+  </p>
+  <div class="provider-grid">
+
+    <!-- Alastyr -->
+    <a href="/go/hosting" target="_blank" rel="noopener" class="aff-card aff-card-accent">
+      <span class="card-badge badge-used">USED BY GPUSTARS</span>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:8px;margin-bottom:4px;">
+        <img src="assets/alastyr-logo.jpeg" alt="Alastyr"
+          style="width:32px;height:32px;object-fit:contain;border-radius:3px;background:#fff;padding:2px;"/>
+        <div class="card-name" style="color:var(--accent);margin-top:0;">Alastyr</div>
+      </div>
+      <div class="card-sub">Web Solutions</div>
+      <div class="card-desc">Domain · Hosting · SSL · Turkey-based · Since 2002 · 24/7 support</div>
+      <div class="card-stats">
+        <div class="card-stat"><div class="sv">99.9%</div><div class="sl">UPTIME</div></div>
+        <div class="card-stat"><div class="sv">2002</div><div class="sl">FOUNDED</div></div>
+        <div class="card-stat"><div class="sv">24/7</div><div class="sl">SUPPORT</div></div>
+      </div>
+      <div class="card-cta cta-accent">Get started → gpustars.com/go/hosting ↗</div>
+    </a>
+
+    <!-- 1ADATA -->
+    <div class="aff-card aff-card-accent" style="cursor:default;">
+      <span class="card-badge badge-partner">ECOSYSTEM PARTNER</span>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:8px;margin-bottom:4px;">
+        <img src="assets/1adata_logo.jpg" alt="1ADATA"
+          style="width:32px;height:32px;object-fit:contain;border-radius:3px;background:#fff;padding:2px;"/>
+        <div class="card-name" style="color:var(--accent);margin-top:0;">1ADATA</div>
+      </div>
+      <div class="card-sub" style="color:var(--accent2);opacity:0.8;">Enables Digital Security</div>
+      <div class="card-desc">Security · Recovery · Data Infrastructure · Turkey</div>
+      <div class="card-stats">
+        <div class="card-stat"><div class="sv">256</div><div class="sl">BIT ENC</div></div>
+        <div class="card-stat"><div class="sv">24/7</div><div class="sl">MONITORING</div></div>
+        <div class="card-stat"><div class="sv">1A</div><div class="sl">GRADE</div></div>
+      </div>
+      <div class="card-cta" style="color:var(--accent2);opacity:0.7;">1ADATA · Enables Digital Security</div>
     </div>
+
   </div>
 
   <footer>
+    <div class="footer-powered">
+      <span class="pw-label">Powered by</span>
+      <span class="pw-btsn">BTSN</span>
+    </div>
     <div class="copy">© 2026 GPUStars · Data updated nightly via GPU Scout</div>
     <div class="copy" id="model-count">—</div>
   </footer>
@@ -642,7 +724,6 @@ function providerBadge(p) {
 }
 
 function render(data) {
-  // Updated time
   if (data.generated_at) {
     const d = new Date(data.generated_at);
     document.getElementById('updated-time').textContent =
@@ -650,7 +731,6 @@ function render(data) {
       ' ' + d.toLocaleTimeString('en-GB', {hour:'2-digit',minute:'2-digit'});
   }
 
-  // Winner
   const best = data.best_cloud;
   if (best) {
     document.getElementById('winner-name').innerHTML =
@@ -689,7 +769,6 @@ function renderTable(cloud) {
     filtered = cloud.filter(m => m.provider === currentFilter);
   }
 
-  // Sort
   filtered = [...filtered].sort((a, b) => {
     let av = a[sortCol] ?? -Infinity;
     let bv = b[sortCol] ?? -Infinity;
@@ -727,7 +806,6 @@ function renderTable(cloud) {
     </tr>`;
   }).join('');
 
-  // Sort indicators
   document.querySelectorAll('th[data-col]').forEach(th => {
     th.classList.remove('sort-asc', 'sort-desc');
     if (th.dataset.col === sortCol) {
@@ -747,12 +825,11 @@ function renderLocal(local) {
     <div class="local-card" style="animation-delay:${(i*0.08).toFixed(2)}s">
       <div class="model">${modelShortName(m.model)}</div>
       <div class="meta">${m.size_gb ? m.size_gb + ' GB' : ''} · ${formatCtx(m.ctx)} ctx</div>
-      <span class="free-tag">FREE · PRIVATE</span>
+      <span class="private-tag">Local · Private · Encrypted</span>
     </div>
   `).join('');
 }
 
-// Filter buttons
 document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -763,7 +840,6 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
   });
 });
 
-// Sort
 document.querySelectorAll('th[data-col]').forEach(th => {
   th.addEventListener('click', () => {
     const col = th.dataset.col;
