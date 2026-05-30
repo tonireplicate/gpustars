@@ -173,11 +173,12 @@
   }
   .top-provider-label {
     padding: 10px 20px;
-    font-family: 'DM Mono', monospace; font-size: 9px;
-    letter-spacing: 3px; color: var(--accent);
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    letter-spacing: 3px; color: var(--bg);
     text-transform: uppercase; white-space: nowrap;
-    border-right: 1px solid rgba(200,241,53,0.1);
-    background: rgba(200,241,53,0.04);
+    border-right: 1px solid rgba(200,241,53,0.3);
+    background: var(--accent);
+    font-weight: 700;
   }
   .top-provider-tabs {
     display: flex; gap: 0; overflow-x: auto;
@@ -186,15 +187,15 @@
   .top-provider-tabs::-webkit-scrollbar { display: none; }
   .top-provider-tab {
     padding: 10px 18px;
-    font-family: 'DM Mono', monospace; font-size: 10px;
+    font-family: 'DM Mono', monospace; font-size: 11px;
     color: var(--muted); cursor: pointer;
     border-right: 1px solid var(--border);
     white-space: nowrap; letter-spacing: 1px;
     transition: color 0.2s, background 0.2s;
-    text-transform: uppercase;
+    text-transform: uppercase; font-weight: 500;
   }
-  .top-provider-tab:hover { color: var(--text); background: rgba(255,255,255,0.02); }
-  .top-provider-tab.active { color: var(--accent); background: rgba(200,241,53,0.04); }
+  .top-provider-tab:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+  .top-provider-tab.active { color: var(--bg); background: var(--accent); font-weight: 700; }
 
   .top-provider-body {
     display: flex; align-items: stretch; flex-wrap: wrap;
@@ -312,10 +313,11 @@
   /* LOCAL MODELS                               */
   /* ═══════════════════════════════════════════ */
   .section-title {
-    font-family: 'DM Mono', monospace; font-size: 10px;
+    font-family: 'DM Mono', monospace; font-size: 11px;
     letter-spacing: 3px; text-transform: uppercase;
-    color: var(--muted); margin: 40px 0 16px;
-    padding-bottom: 8px; border-bottom: 1px solid var(--border);
+    color: var(--text); margin: 40px 0 16px;
+    padding-bottom: 10px; border-bottom: 2px solid var(--accent);
+    font-weight: 500;
   }
   .local-grid {
     display: grid;
@@ -367,14 +369,15 @@
 
   .card-badge {
     position: absolute; top: 12px; right: 12px;
-    font-family: 'DM Mono', monospace; font-size: 9px;
-    letter-spacing: 2px; padding: 3px 8px; border-radius: 2px;
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 1.5px; padding: 4px 10px; border-radius: 3px;
+    font-weight: 700;
   }
-  .badge-affiliate { background: rgba(200,241,53,0.15); border: 1px solid rgba(200,241,53,0.3); color: var(--accent); }
-  .badge-partner { background: rgba(53,241,200,0.1); border: 1px solid rgba(53,241,200,0.2); color: var(--accent2); }
-  .badge-enterprise { background: rgba(241,180,53,0.1); border: 1px solid rgba(241,180,53,0.2); color: var(--gold); }
-  .badge-hyperscaler { background: rgba(241,53,96,0.1); border: 1px solid rgba(241,53,96,0.2); color: var(--danger); }
-  .badge-used { background: rgba(200,241,53,0.15); border: 1px solid rgba(200,241,53,0.3); color: var(--accent); }
+  .badge-affiliate { background: rgba(200,241,53,0.2); border: 1px solid rgba(200,241,53,0.5); color: var(--accent); }
+  .badge-partner { background: rgba(53,241,200,0.15); border: 1px solid rgba(53,241,200,0.4); color: var(--accent2); }
+  .badge-enterprise { background: rgba(241,180,53,0.18); border: 1px solid rgba(241,180,53,0.45); color: var(--gold); }
+  .badge-hyperscaler { background: rgba(241,53,96,0.15); border: 1px solid rgba(241,53,96,0.4); color: var(--danger); }
+  .badge-used { background: rgba(200,241,53,0.2); border: 1px solid rgba(200,241,53,0.5); color: var(--accent); }
 
   .card-name { font-size: 19px; font-weight: 700; margin-bottom: 3px; margin-top: 8px; }
   .card-sub { font-family: 'DM Mono', monospace; font-size: 10px; opacity: 0.6; margin-bottom: 10px; }
@@ -551,11 +554,11 @@
   <!-- AI INFERENCE PROVIDERS -->
   <div class="section-title" style="margin-top:48px;">AI Inference Providers</div>
   <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:18px;">
-    Affiliate links — we earn a commission when you sign up. Prices tracked nightly by GPU Scout.
+    Verified providers — independently tested and selected by GPUStars. Prices tracked nightly by GPU Scout.
   </p>
   <div class="provider-grid">
     <a href="https://api.together.xyz/signup?referral=gpustars" target="_blank" rel="noopener" class="aff-card aff-card-gold">
-      <span class="card-badge badge-affiliate">AFFILIATE</span>
+      <span class="card-badge badge-affiliate">VERIFIED</span>
       <div class="card-name" style="color:var(--gold);">Together.ai</div>
       <div class="card-sub">Open-Source Inference API</div>
       <div class="card-desc">70+ open models · Llama, Mistral, Qwen · Competitive pricing · Fast inference</div>
@@ -567,7 +570,7 @@
       <div class="card-cta cta-gold">Sign up → get free credits ↗</div>
     </a>
     <a href="https://deepinfra.com/?referral=gpustars" target="_blank" rel="noopener" class="aff-card aff-card-cyan">
-      <span class="card-badge badge-affiliate">AFFILIATE</span>
+      <span class="card-badge badge-affiliate">VERIFIED</span>
       <div class="card-name" style="color:var(--accent2);">DeepInfra</div>
       <div class="card-sub">Serverless Inference</div>
       <div class="card-desc">Pay-per-token · No minimums · OpenAI-compatible API · 150+ models available</div>
@@ -583,11 +586,11 @@
   <!-- GPU CLOUD STARTUP/SME -->
   <div class="section-title">GPU Cloud — Startup &amp; SME</div>
   <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:18px;">
-    On-demand GPUs from $0.20/hr. Affiliate links — we earn when you sign up.
+    On-demand GPUs from $0.20/hr. Independently verified · Prices updated nightly by GPU Scout.
   </p>
   <div class="provider-grid">
     <a href="https://runpod.io/?ref=gpustars" target="_blank" rel="noopener" class="aff-card aff-card-accent">
-      <span class="card-badge badge-affiliate">AFFILIATE · 10%</span>
+      <span class="card-badge badge-affiliate">VERIFIED · 10%</span>
       <div class="card-name" style="color:var(--accent);">RunPod</div>
       <div class="card-sub">GPU Cloud & Serverless</div>
       <div class="card-desc">H100 · A100 · RTX 4090 · Serverless endpoints · Persistent storage · Pod templates</div>
@@ -599,7 +602,7 @@
       <div class="card-cta cta-accent">Deploy GPU → runpod.io ↗</div>
     </a>
     <a href="https://vast.ai/?ref=gpustars" target="_blank" rel="noopener" class="aff-card aff-card-cyan">
-      <span class="card-badge badge-affiliate">AFFILIATE</span>
+      <span class="card-badge badge-affiliate">VERIFIED</span>
       <div class="card-name" style="color:var(--accent2);">Vast.ai</div>
       <div class="card-sub">GPU Marketplace</div>
       <div class="card-desc">Cheapest spot GPUs · Community hosts · H100 from $1.99/hr · Docker-native · Interruptible</div>
@@ -611,7 +614,7 @@
       <div class="card-cta cta-cyan">Browse GPUs → vast.ai ↗</div>
     </a>
     <a href="https://lambdalabs.com/?ref=gpustars" target="_blank" rel="noopener" class="aff-card aff-card-gold">
-      <span class="card-badge badge-affiliate">AFFILIATE</span>
+      <span class="card-badge badge-affiliate">VERIFIED</span>
       <div class="card-name" style="color:var(--gold);">Lambda Labs</div>
       <div class="card-sub">GPU Cloud for ML</div>
       <div class="card-desc">H100 clusters · On-demand & reserved · Pre-installed ML stack · Jupyter · SSH access</div>
@@ -623,7 +626,7 @@
       <div class="card-cta cta-gold">Launch instance → lambdalabs.com ↗</div>
     </a>
     <a href="https://marketplace.tensordock.com/deploy" target="_blank" rel="noopener" class="aff-card aff-card-cyan">
-      <span class="card-badge badge-affiliate">MARKETPLACE</span>
+      <span class="card-badge badge-affiliate">VERIFIED</span>
       <div class="card-name" style="color:var(--accent2);">TensorDock</div>
       <div class="card-sub">GPU Marketplace · 100+ Locations</div>
       <div class="card-desc">RTX 4090 · A100 · H100 · KVM isolation · Pay-per-second · No quotas · Global network</div>
@@ -793,6 +796,9 @@
     </div>
     <div class="copy">© 2026 GPUStars · Data updated live via GPU Scout</div>
     <div class="copy" id="model-count">—</div>
+    <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px;">
+      🔒 <span style="color:var(--accent2);">Secured by</span>&nbsp;<a href="https://1adata.com" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:700;letter-spacing:1px;">1ADATA</a>
+    </div>
   </footer>
 </div>
 
