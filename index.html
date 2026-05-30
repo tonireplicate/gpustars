@@ -345,6 +345,50 @@
 
   footer .copy { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
 
+
+  /* Ticker */
+  .ticker-wrap {
+    width: 100%;
+    background: rgba(200,241,53,0.06);
+    border-bottom: 1px solid rgba(200,241,53,0.15);
+    padding: 10px 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+  }
+  .ticker-track {
+    display: flex;
+    white-space: nowrap;
+    animation: ticker 40s linear infinite;
+  }
+  .ticker-track:hover { animation-play-state: paused; }
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 40px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+  .ticker-item a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .ticker-item a:hover { text-decoration: underline; }
+  .ticker-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
+
   .error-msg { padding: 40px; text-align: center; font-family: 'DM Mono', monospace; color: var(--danger); font-size: 13px; }
 
   @media (max-width: 640px) {
@@ -355,6 +399,23 @@
 </style>
 </head>
 <body>
+
+
+<div class="ticker-wrap">
+  <div class="ticker-track" id="ticker-track">
+    <div class="ticker-item"><span class="ticker-dot"></span>⚡ <strong style="color:var(--text)">TensorDock</strong>&nbsp;· H100 SXM $2.25/hr — industry lowest &nbsp;<a href="https://dashboard.tensordock.com/deploy" target="_blank">Deploy now ↗</a></div>
+    <div class="ticker-item"><span class="ticker-dot"></span>🟢 <strong style="color:var(--text)">Northflank</strong>&nbsp;· Full-stack GPU platform · EU region available &nbsp;<a href="https://northflank.com" target="_blank">Explore ↗</a></div>
+    <div class="ticker-item"><span class="ticker-dot"></span>💰 <strong style="color:var(--text)">GMI Cloud</strong>&nbsp;· GB200 NVL72 available pay-as-you-go &nbsp;<a href="https://gmicloud.ai" target="_blank">Try now ↗</a></div>
+    <div class="ticker-item"><span class="ticker-dot"></span>🔋 <strong style="color:var(--text)">DataCrunch</strong>&nbsp;· 100% renewable energy · H100 from $2.10/hr &nbsp;<a href="https://datacrunch.io" target="_blank">Learn more ↗</a></div>
+    <div class="ticker-item"><span class="ticker-dot"></span>🆓 <strong style="color:var(--text)">Voltage Park</strong>&nbsp;· Non-profit · 24,000 H100s at cost for AI startups &nbsp;<a href="https://voltagepark.com" target="_blank">Apply ↗</a></div>
+    <!-- duplicate for seamless loop -->
+    <div class="ticker-item"><span class="ticker-dot"></span>⚡ <strong style="color:var(--text)">TensorDock</strong>&nbsp;· H100 SXM $2.25/hr — industry lowest &nbsp;<a href="https://dashboard.tensordock.com/deploy" target="_blank">Deploy now ↗</a></div>
+    <div class="ticker-item"><span class="ticker-dot"></span>🟢 <strong style="color:var(--text)">Northflank</strong>&nbsp;· Full-stack GPU platform · EU region available &nbsp;<a href="https://northflank.com" target="_blank">Explore ↗</a></div>
+    <div class="ticker-item"><span class="ticker-dot"></span>💰 <strong style="color:var(--text)">GMI Cloud</strong>&nbsp;· GB200 NVL72 available pay-as-you-go &nbsp;<a href="https://gmicloud.ai" target="_blank">Try now ↗</a></div>
+    <div class="ticker-item"><span class="ticker-dot"></span>🔋 <strong style="color:var(--text)">DataCrunch</strong>&nbsp;· 100% renewable energy · H100 from $2.10/hr &nbsp;<a href="https://datacrunch.io" target="_blank">Learn more ↗</a></div>
+    <div class="ticker-item"><span class="ticker-dot"></span>🆓 <strong style="color:var(--text)">Voltage Park</strong>&nbsp;· Non-profit · 24,000 H100s at cost for AI startups &nbsp;<a href="https://voltagepark.com" target="_blank">Apply ↗</a></div>
+  </div>
+</div>
 
 <div class="container">
   <header>
