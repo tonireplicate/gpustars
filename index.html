@@ -17,9 +17,40 @@
     --muted: #5a5a72;
     --danger: #f13560;
     --gold: #f1b435;
+    --toggle-bg: #1e1e2e;
+    --toggle-knob: #c8f135;
   }
 
+  :root.light {
+    --bg: #f2f2ed;
+    --surface: #ffffff;
+    --border: #ddddd4;
+    --accent: #5a8a00;
+    --accent2: #007a5e;
+    --text: #12121e;
+    --muted: #7a7a8a;
+    --danger: #c0003a;
+    --gold: #8a5500;
+    --toggle-bg: #ddddd4;
+    --toggle-knob: #5a8a00;
+  }
+
+  :root.light body::before {
+    background-image:
+      linear-gradient(rgba(90,138,0,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(90,138,0,0.05) 1px, transparent 1px);
+  }
+  :root.light .ticker-wrap { background: rgba(90,138,0,0.06); border-bottom: 1px solid rgba(90,138,0,0.15); }
+  :root.light .ticker-dot { background: var(--accent); }
+  :root.light .top-provider-strip { background: linear-gradient(135deg, rgba(90,138,0,0.08), rgba(0,122,94,0.04)); border-color: rgba(90,138,0,0.25); }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* Smooth theme transitions */
+  body, header, .ticker-wrap, .winner-banner, .table-wrap, table, thead, th, td,
+  .local-card, .aff-card, footer, .top-provider-strip, .filter-btn, .score-pill {
+    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+  }
 
   body {
     background: var(--bg);
@@ -69,6 +100,7 @@
     background: var(--accent);
     clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
     animation: pulse-star 3s ease-in-out infinite;
+    transition: background 0.25s ease;
   }
 
   @keyframes pulse-star {
@@ -85,138 +117,220 @@
     letter-spacing: 2px; text-transform: uppercase;
   }
 
-  .updated { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); text-align: right; }
+  /* Header right side */
+  .header-right { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
 
+  .updated { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); text-align: right; }
   .updated .dot {
     display: inline-block; width: 6px; height: 6px;
     background: var(--accent); border-radius: 50%;
     margin-right: 6px; animation: blink 2s infinite;
+    transition: background 0.25s ease;
   }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
 
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.2; }
+  /* Theme toggle */
+  .theme-toggle-wrap { display: flex; align-items: center; gap: 8px; }
+  .theme-icon { font-size: 13px; opacity: 0.5; transition: opacity 0.3s; }
+  .theme-icon.active { opacity: 1; }
+
+  .theme-toggle {
+    position: relative; width: 48px; height: 26px;
+    background: var(--toggle-bg);
+    border: 1px solid var(--border);
+    border-radius: 13px; cursor: pointer;
+    transition: background 0.3s, border-color 0.3s;
+    flex-shrink: 0;
   }
-
-  .winner-banner {
-    margin: 40px 0 0; padding: 28px 32px;
-    background: linear-gradient(135deg, rgba(200,241,53,0.08), rgba(53,241,200,0.04));
-    border: 1px solid rgba(200,241,53,0.3); border-radius: 4px;
-    display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
-    opacity: 0; transform: translateY(10px); transition: all 0.5s ease;
+  .theme-toggle::before {
+    content: '';
+    position: absolute; top: 3px; left: 3px;
+    width: 18px; height: 18px;
+    background: var(--toggle-knob);
+    border-radius: 50%;
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), background 0.3s;
   }
+  :root.light .theme-toggle::before { transform: translateX(22px); }
 
-  .winner-banner.visible { opacity: 1; transform: translateY(0); }
+  /* ═══════════════════════════════════════════ */
+  /* TOP RATED PROVIDER BANNER                  */
+  /* ═══════════════════════════════════════════ */
+  .top-provider-strip {
+    margin: 28px 0 0;
+    padding: 0;
+    background: linear-gradient(135deg, rgba(200,241,53,0.06), rgba(53,241,200,0.03));
+    border: 1px solid rgba(200,241,53,0.2);
+    border-radius: 4px;
+    overflow: hidden;
+    opacity: 0; transform: translateY(8px);
+    transition: opacity 0.5s ease, transform 0.5s ease, background 0.25s, border-color 0.25s;
+  }
+  .top-provider-strip.visible { opacity: 1; transform: translateY(0); }
 
-  .winner-label {
-    font-family: 'DM Mono', monospace; font-size: 10px;
+  .top-provider-header {
+    display: flex; align-items: center; gap: 0;
+    border-bottom: 1px solid rgba(200,241,53,0.1);
+  }
+  .top-provider-label {
+    padding: 10px 20px;
+    font-family: 'DM Mono', monospace; font-size: 9px;
     letter-spacing: 3px; color: var(--accent);
     text-transform: uppercase; white-space: nowrap;
+    border-right: 1px solid rgba(200,241,53,0.1);
+    background: rgba(200,241,53,0.04);
+  }
+  .top-provider-tabs {
+    display: flex; gap: 0; overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .top-provider-tabs::-webkit-scrollbar { display: none; }
+  .top-provider-tab {
+    padding: 10px 18px;
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    color: var(--muted); cursor: pointer;
+    border-right: 1px solid var(--border);
+    white-space: nowrap; letter-spacing: 1px;
+    transition: color 0.2s, background 0.2s;
+    text-transform: uppercase;
+  }
+  .top-provider-tab:hover { color: var(--text); background: rgba(255,255,255,0.02); }
+  .top-provider-tab.active { color: var(--accent); background: rgba(200,241,53,0.04); }
+
+  .top-provider-body {
+    display: flex; align-items: stretch; flex-wrap: wrap;
+  }
+  .top-provider-main {
+    flex: 1; min-width: 260px;
+    padding: 20px 24px;
+    border-right: 1px solid rgba(200,241,53,0.08);
+  }
+  .top-provider-model {
+    font-size: 18px; font-weight: 700; margin-bottom: 4px;
+  }
+  .top-provider-model .ptag {
+    font-size: 11px; font-weight: 400;
+    color: var(--muted); font-family: 'DM Mono', monospace;
+    margin-right: 8px;
+  }
+  .top-provider-sub {
+    font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted);
   }
 
-  .winner-name { font-size: 22px; font-weight: 700; flex: 1; }
-  .winner-name .provider-tag { font-size: 12px; font-weight: 400; color: var(--muted); margin-right: 8px; font-family: 'DM Mono', monospace; }
+  .top-provider-metrics {
+    display: flex; flex-wrap: wrap;
+  }
+  .tpm {
+    padding: 16px 20px;
+    border-right: 1px solid rgba(200,241,53,0.08);
+    text-align: center; min-width: 90px;
+  }
+  .tpm:last-child { border-right: none; }
+  .tpm .tv { font-family: 'DM Mono', monospace; font-size: 20px; font-weight: 700; color: var(--accent); }
+  .tpm .tl { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
 
-  .winner-scores { display: flex; gap: 24px; flex-wrap: wrap; }
-  .winner-score-item { text-align: center; }
-  .winner-score-item .val { font-size: 24px; font-weight: 800; color: var(--accent); font-family: 'DM Mono', monospace; }
-  .winner-score-item .lbl { font-size: 10px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; font-family: 'DM Mono', monospace; }
+  /* Original winner banner (kept for compatibility but hidden) */
+  .winner-banner { display: none; }
 
+  /* ═══════════════════════════════════════════ */
+  /* FILTERS                                    */
+  /* ═══════════════════════════════════════════ */
   .filters { display: flex; gap: 8px; margin: 32px 0 24px; flex-wrap: wrap; }
-
   .filter-btn {
     padding: 8px 18px; border: 1px solid var(--border);
     background: transparent; color: var(--muted);
     font-family: 'DM Mono', monospace; font-size: 11px;
     letter-spacing: 1px; text-transform: uppercase;
-    cursor: pointer; border-radius: 2px; transition: all 0.2s;
+    cursor: pointer; border-radius: 2px;
   }
-
   .filter-btn:hover, .filter-btn.active {
     border-color: var(--accent); color: var(--accent); background: rgba(200,241,53,0.05);
   }
 
+  /* ═══════════════════════════════════════════ */
+  /* TABLE                                      */
+  /* ═══════════════════════════════════════════ */
   .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 4px; }
-
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
-
   thead { background: var(--surface); border-bottom: 1px solid var(--border); }
-
   th {
-    padding: 14px 16px; text-align: left;
+    padding: 14px 14px; text-align: left;
     font-family: 'DM Mono', monospace; font-size: 10px;
     letter-spacing: 2px; text-transform: uppercase;
     color: var(--muted); cursor: pointer; white-space: nowrap; user-select: none;
   }
-
   th:hover { color: var(--accent); }
   th.sort-asc::after { content: ' ↑'; color: var(--accent); }
   th.sort-desc::after { content: ' ↓'; color: var(--accent); }
 
   tbody tr {
     border-bottom: 1px solid var(--border);
-    transition: background 0.15s; opacity: 0;
-    animation: fadeIn 0.4s forwards;
+    opacity: 0; animation: fadeIn 0.4s forwards;
   }
-
   @keyframes fadeIn { to { opacity: 1; } }
-
   tbody tr:hover { background: rgba(255,255,255,0.02); }
   tbody tr.rank-1 { background: rgba(200,241,53,0.04); }
 
-  td { padding: 14px 16px; vertical-align: middle; white-space: nowrap; }
+  td { padding: 12px 14px; vertical-align: middle; white-space: nowrap; }
 
-  .rank { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); width: 40px; }
+  .rank { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); width: 36px; }
   .rank-1 .rank { color: var(--accent); font-weight: 700; }
-
-  .model-name { font-weight: 600; max-width: 220px; overflow: hidden; text-overflow: ellipsis; }
+  .model-name { font-weight: 600; max-width: 200px; overflow: hidden; text-overflow: ellipsis; }
 
   .provider-badge {
     display: inline-block; padding: 2px 8px; border-radius: 2px;
     font-family: 'DM Mono', monospace; font-size: 10px;
     letter-spacing: 1px; text-transform: uppercase;
   }
-
   .badge-deepinfra { background: rgba(53,241,200,0.1); color: var(--accent2); border: 1px solid rgba(53,241,200,0.2); }
   .badge-together { background: rgba(241,180,53,0.1); color: var(--gold); border: 1px solid rgba(241,180,53,0.2); }
   .badge-local { background: rgba(200,241,53,0.1); color: var(--accent); border: 1px solid rgba(200,241,53,0.2); }
 
-  .score-bar-wrap { display: flex; align-items: center; gap: 10px; min-width: 120px; }
+  /* Score bar (composite) */
+  .score-bar-wrap { display: flex; align-items: center; gap: 8px; min-width: 110px; }
   .score-bar { flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
-  .score-bar-fill { height: 100%; border-radius: 2px; background: var(--accent); transition: width 0.6s ease; }
+  .score-bar-fill { height: 100%; border-radius: 2px; background: var(--accent); transition: width 0.6s ease, background 0.25s; }
   .score-val { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; min-width: 32px; text-align: right; }
+
+  /* Score pills for speed/quality */
+  .score-pill {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 2px 8px; border-radius: 2px;
+    font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500;
+  }
+  .pill-speed { background: rgba(53,241,200,0.08); color: var(--accent2); border: 1px solid rgba(53,241,200,0.15); }
+  .pill-quality { background: rgba(200,241,53,0.08); color: var(--accent); border: 1px solid rgba(200,241,53,0.15); }
+  .pill-speed-slow { background: rgba(241,180,53,0.08); color: var(--gold); border: 1px solid rgba(241,180,53,0.15); }
+  .pill-speed-bad { background: rgba(241,53,96,0.08); color: var(--danger); border: 1px solid rgba(241,53,96,0.15); }
+
   .price-val { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--accent2); }
-  .latency-val { font-family: 'DM Mono', monospace; font-size: 12px; }
-  .latency-ok { color: var(--accent); }
-  .latency-slow { color: var(--gold); }
-  .latency-fail { color: var(--danger); }
   .ctx-val { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
 
+  /* Column header tooltips */
+  th[title] { text-decoration: underline dotted; text-underline-offset: 3px; }
+
+  /* ═══════════════════════════════════════════ */
+  /* LOCAL MODELS                               */
+  /* ═══════════════════════════════════════════ */
   .section-title {
     font-family: 'DM Mono', monospace; font-size: 10px;
     letter-spacing: 3px; text-transform: uppercase;
     color: var(--muted); margin: 40px 0 16px;
     padding-bottom: 8px; border-bottom: 1px solid var(--border);
   }
-
-  /* Local models */
   .local-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 12px; margin-bottom: 40px;
   }
-
   .local-card {
     padding: 20px; border: 1px solid var(--border);
     border-radius: 4px; background: var(--surface);
     opacity: 0; animation: fadeIn 0.4s forwards;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, background 0.25s;
   }
-
   .local-card:hover { border-color: rgba(200,241,53,0.2); }
   .local-card .model { font-weight: 600; font-size: 14px; margin-bottom: 8px; }
   .local-card .meta { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
-
   .local-card .private-tag {
     display: inline-flex; align-items: center; gap: 6px;
     margin-top: 10px; padding: 3px 10px;
@@ -226,21 +340,16 @@
     font-family: 'DM Mono', monospace; font-size: 10px;
     letter-spacing: 1px; border-radius: 2px;
   }
+  .local-card .private-tag::before { content: '🔒'; font-size: 10px; }
 
-  .local-card .private-tag::before {
-    content: '🔒';
-    font-size: 10px;
-  }
-
-  /* Provider section grid */
+  /* ═══════════════════════════════════════════ */
+  /* PROVIDER CARDS                             */
+  /* ═══════════════════════════════════════════ */
   .provider-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 14px;
-    margin-bottom: 16px;
+    gap: 14px; margin-bottom: 16px;
   }
-
-  /* Affiliate card */
   .aff-card {
     padding: 22px; border-radius: 4px;
     display: flex; flex-direction: column;
@@ -248,117 +357,68 @@
     position: relative; overflow: hidden;
     text-decoration: none;
   }
-
-  .aff-card-accent {
-    border: 1px solid rgba(200,241,53,0.3);
-    background: rgba(200,241,53,0.03);
-  }
-  .aff-card-accent:hover {
-    border-color: rgba(200,241,53,0.6);
-    background: rgba(200,241,53,0.07);
-  }
-
-  .aff-card-cyan {
-    border: 1px solid rgba(53,241,200,0.25);
-    background: rgba(53,241,200,0.03);
-  }
-  .aff-card-cyan:hover {
-    border-color: rgba(53,241,200,0.5);
-    background: rgba(53,241,200,0.07);
-  }
-
-  .aff-card-gold {
-    border: 1px solid rgba(241,180,53,0.25);
-    background: rgba(241,180,53,0.03);
-  }
-  .aff-card-gold:hover {
-    border-color: rgba(241,180,53,0.5);
-    background: rgba(241,180,53,0.07);
-  }
-
-  .aff-card-muted {
-    border: 1px solid var(--border);
-    background: var(--surface);
-    cursor: default;
-  }
+  .aff-card-accent { border: 1px solid rgba(200,241,53,0.3); background: rgba(200,241,53,0.03); }
+  .aff-card-accent:hover { border-color: rgba(200,241,53,0.6); background: rgba(200,241,53,0.07); }
+  .aff-card-cyan { border: 1px solid rgba(53,241,200,0.25); background: rgba(53,241,200,0.03); }
+  .aff-card-cyan:hover { border-color: rgba(53,241,200,0.5); background: rgba(53,241,200,0.07); }
+  .aff-card-gold { border: 1px solid rgba(241,180,53,0.25); background: rgba(241,180,53,0.03); }
+  .aff-card-gold:hover { border-color: rgba(241,180,53,0.5); background: rgba(241,180,53,0.07); }
+  .aff-card-muted { border: 1px solid var(--border); background: var(--surface); cursor: default; }
 
   .card-badge {
     position: absolute; top: 12px; right: 12px;
     font-family: 'DM Mono', monospace; font-size: 9px;
     letter-spacing: 2px; padding: 3px 8px; border-radius: 2px;
   }
-
-  .badge-affiliate {
-    background: rgba(200,241,53,0.15); border: 1px solid rgba(200,241,53,0.3); color: var(--accent);
-  }
-  .badge-partner {
-    background: rgba(53,241,200,0.1); border: 1px solid rgba(53,241,200,0.2); color: var(--accent2);
-  }
-  .badge-enterprise {
-    background: rgba(241,180,53,0.1); border: 1px solid rgba(241,180,53,0.2); color: var(--gold);
-  }
-  .badge-hyperscaler {
-    background: rgba(241,53,96,0.1); border: 1px solid rgba(241,53,96,0.2); color: var(--danger);
-  }
-  .badge-used {
-    background: rgba(200,241,53,0.15); border: 1px solid rgba(200,241,53,0.3); color: var(--accent);
-  }
+  .badge-affiliate { background: rgba(200,241,53,0.15); border: 1px solid rgba(200,241,53,0.3); color: var(--accent); }
+  .badge-partner { background: rgba(53,241,200,0.1); border: 1px solid rgba(53,241,200,0.2); color: var(--accent2); }
+  .badge-enterprise { background: rgba(241,180,53,0.1); border: 1px solid rgba(241,180,53,0.2); color: var(--gold); }
+  .badge-hyperscaler { background: rgba(241,53,96,0.1); border: 1px solid rgba(241,53,96,0.2); color: var(--danger); }
+  .badge-used { background: rgba(200,241,53,0.15); border: 1px solid rgba(200,241,53,0.3); color: var(--accent); }
 
   .card-name { font-size: 19px; font-weight: 700; margin-bottom: 3px; margin-top: 8px; }
   .card-sub { font-family: 'DM Mono', monospace; font-size: 10px; opacity: 0.6; margin-bottom: 10px; }
   .card-desc { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); margin-bottom: 14px; flex: 1; }
-
   .card-stats { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: auto; }
   .card-stat { text-align: center; }
   .card-stat .sv { font-family: 'DM Mono', monospace; font-size: 17px; font-weight: 700; color: var(--text); }
   .card-stat .sl { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 1px; }
-
-  .card-cta {
-    margin-top: 14px; font-family: 'DM Mono', monospace;
-    font-size: 11px;
-  }
+  .card-cta { margin-top: 14px; font-family: 'DM Mono', monospace; font-size: 11px; }
   .cta-accent { color: var(--accent); }
   .cta-cyan { color: var(--accent2); }
   .cta-gold { color: var(--gold); }
   .cta-muted { color: var(--muted); opacity: 0.6; }
 
-  /* Footer */
+  /* ═══════════════════════════════════════════ */
+  /* FOOTER                                     */
+  /* ═══════════════════════════════════════════ */
   footer {
     margin-top: 60px; padding: 32px 0;
     border-top: 1px solid var(--border);
     display: flex; justify-content: space-between;
     align-items: center; flex-wrap: wrap; gap: 16px;
   }
-
-  .footer-powered {
-    font-family: 'DM Mono', monospace; font-size: 11px;
-    display: flex; align-items: center; gap: 6px;
-  }
-
+  .footer-powered { font-family: 'DM Mono', monospace; font-size: 11px; display: flex; align-items: center; gap: 6px; }
   .footer-powered .pw-label { color: var(--muted); }
-
   .footer-powered .pw-btsn {
     background: linear-gradient(90deg, var(--accent), var(--accent2), var(--gold));
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     background-clip: text; font-weight: 700; letter-spacing: 2px;
   }
-
   footer .copy { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
 
-
-  /* Ticker */
+  /* ═══════════════════════════════════════════ */
+  /* TICKER                                     */
+  /* ═══════════════════════════════════════════ */
   .ticker-wrap {
     width: 100%;
     background: rgba(200,241,53,0.06);
     border-bottom: 1px solid rgba(200,241,53,0.15);
-    padding: 10px 0;
-    overflow: hidden;
-    position: relative;
-    z-index: 2;
+    padding: 10px 0; overflow: hidden;
+    position: relative; z-index: 2;
   }
   .ticker-track {
-    display: flex;
-    white-space: nowrap;
+    display: flex; white-space: nowrap;
     animation: ticker 40s linear infinite;
   }
   .ticker-track:hover { animation-play-state: paused; }
@@ -367,39 +427,26 @@
     100% { transform: translateX(-50%); }
   }
   .ticker-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+    display: inline-flex; align-items: center; gap: 6px;
     padding: 0 40px;
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.5px;
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    color: var(--muted); letter-spacing: 0.5px;
   }
-  .ticker-item a {
-    color: var(--accent);
-    text-decoration: none;
-  }
+  .ticker-item a { color: var(--accent); text-decoration: none; }
   .ticker-item a:hover { text-decoration: underline; }
-  .ticker-dot {
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: var(--accent);
-    opacity: 0.5;
-    flex-shrink: 0;
-  }
+  .ticker-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); opacity: 0.5; flex-shrink: 0; }
 
   .error-msg { padding: 40px; text-align: center; font-family: 'DM Mono', monospace; color: var(--danger); font-size: 13px; }
 
   @media (max-width: 640px) {
-    .winner-banner { flex-direction: column; align-items: flex-start; }
-    .winner-scores { gap: 16px; }
-    th, td { padding: 10px 12px; }
+    .top-provider-body { flex-direction: column; }
+    .top-provider-metrics { border-top: 1px solid rgba(200,241,53,0.08); }
+    .tpm { border-bottom: none; }
+    th, td { padding: 10px 10px; }
   }
 </style>
 </head>
 <body>
-
 
 <div class="ticker-wrap">
   <div class="ticker-track" id="ticker-track">
@@ -408,7 +455,6 @@
     <div class="ticker-item"><span class="ticker-dot"></span>💰 <strong style="color:var(--text)">GMI Cloud</strong>&nbsp;· GB200 NVL72 available pay-as-you-go &nbsp;<a href="https://gmicloud.ai" target="_blank">Try now ↗</a></div>
     <div class="ticker-item"><span class="ticker-dot"></span>🔋 <strong style="color:var(--text)">DataCrunch</strong>&nbsp;· 100% renewable energy · H100 from $2.10/hr &nbsp;<a href="https://datacrunch.io" target="_blank">Learn more ↗</a></div>
     <div class="ticker-item"><span class="ticker-dot"></span>🆓 <strong style="color:var(--text)">Voltage Park</strong>&nbsp;· Non-profit · 24,000 H100s at cost for AI startups &nbsp;<a href="https://voltagepark.com" target="_blank">Apply ↗</a></div>
-    <!-- duplicate for seamless loop -->
     <div class="ticker-item"><span class="ticker-dot"></span>⚡ <strong style="color:var(--text)">TensorDock</strong>&nbsp;· H100 SXM $2.25/hr — industry lowest &nbsp;<a href="https://dashboard.tensordock.com/deploy" target="_blank">Deploy now ↗</a></div>
     <div class="ticker-item"><span class="ticker-dot"></span>🟢 <strong style="color:var(--text)">Northflank</strong>&nbsp;· Full-stack GPU platform · EU region available &nbsp;<a href="https://northflank.com" target="_blank">Explore ↗</a></div>
     <div class="ticker-item"><span class="ticker-dot"></span>💰 <strong style="color:var(--text)">GMI Cloud</strong>&nbsp;· GB200 NVL72 available pay-as-you-go &nbsp;<a href="https://gmicloud.ai" target="_blank">Try now ↗</a></div>
@@ -427,12 +473,41 @@
         </div>
         <div class="tagline" style="margin-top:8px;">AI Model Intelligence — Price · Quality · Speed</div>
       </div>
-      <div class="updated">
-        <span class="dot"></span>
-        <span id="updated-time">Loading...</span>
+      <div class="header-right">
+        <div class="updated">
+          <span class="dot"></span>
+          <span id="updated-time">Loading...</span>
+        </div>
+        <div class="theme-toggle-wrap">
+          <span class="theme-icon active" id="icon-dark">🌙</span>
+          <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
+          <span class="theme-icon" id="icon-light">☀️</span>
+        </div>
       </div>
     </div>
 
+    <!-- TOP RATED PROVIDER BANNER -->
+    <div class="top-provider-strip" id="top-provider-strip">
+      <div class="top-provider-header">
+        <div class="top-provider-label">★ Top Rated</div>
+        <div class="top-provider-tabs" id="top-tabs">
+          <div class="top-provider-tab active" data-cat="overall">Overall</div>
+          <div class="top-provider-tab" data-cat="speed">Fastest</div>
+          <div class="top-provider-tab" data-cat="quality">Best Quality</div>
+          <div class="top-provider-tab" data-cat="value">Best Value</div>
+          <div class="top-provider-tab" data-cat="turkish">Best Turkish</div>
+        </div>
+      </div>
+      <div class="top-provider-body">
+        <div class="top-provider-main">
+          <div class="top-provider-model" id="tp-model">—</div>
+          <div class="top-provider-sub" id="tp-sub">—</div>
+        </div>
+        <div class="top-provider-metrics" id="tp-metrics"></div>
+      </div>
+    </div>
+
+    <!-- hidden original winner banner -->
     <div class="winner-banner" id="winner-banner">
       <div class="winner-label">★ Top Rated</div>
       <div class="winner-name" id="winner-name">—</div>
@@ -455,9 +530,10 @@
             <th>#</th>
             <th data-col="model">Model</th>
             <th data-col="provider">Provider</th>
-            <th data-col="composite">Score</th>
+            <th data-col="composite" title="Weighted composite of quality, speed, price, Turkish">Score</th>
+            <th data-col="quality_score" title="Response quality benchmark score">Quality</th>
+            <th data-col="speed_score" title="Tokens per second / latency score">Speed</th>
             <th data-col="blended">Price/1M</th>
-            <th data-col="latency_s">Latency</th>
             <th data-col="turkce_score">Turkish</th>
             <th data-col="ctx">Context</th>
           </tr>
@@ -472,16 +548,12 @@
     <div class="local-grid" id="local-grid"></div>
   </div>
 
-  <!-- ═══════════════════════════════════════════ -->
-  <!--   AI INFERENCE PROVIDERS                   -->
-  <!-- ═══════════════════════════════════════════ -->
+  <!-- AI INFERENCE PROVIDERS -->
   <div class="section-title" style="margin-top:48px;">AI Inference Providers</div>
   <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:18px;">
     Affiliate links — we earn a commission when you sign up. Prices tracked nightly by GPU Scout.
   </p>
   <div class="provider-grid">
-
-    <!-- Together.ai -->
     <a href="https://api.together.xyz/signup?referral=gpustars" target="_blank" rel="noopener" class="aff-card aff-card-gold">
       <span class="card-badge badge-affiliate">AFFILIATE</span>
       <div class="card-name" style="color:var(--gold);">Together.ai</div>
@@ -494,8 +566,6 @@
       </div>
       <div class="card-cta cta-gold">Sign up → get free credits ↗</div>
     </a>
-
-    <!-- DeepInfra -->
     <a href="https://deepinfra.com/?referral=gpustars" target="_blank" rel="noopener" class="aff-card aff-card-cyan">
       <span class="card-badge badge-affiliate">AFFILIATE</span>
       <div class="card-name" style="color:var(--accent2);">DeepInfra</div>
@@ -508,19 +578,14 @@
       </div>
       <div class="card-cta cta-cyan">Start free → no credit card ↗</div>
     </a>
-
   </div>
 
-  <!-- ═══════════════════════════════════════════ -->
-  <!--   GPU CLOUD — STARTUP / SME                -->
-  <!-- ═══════════════════════════════════════════ -->
+  <!-- GPU CLOUD STARTUP/SME -->
   <div class="section-title">GPU Cloud — Startup &amp; SME</div>
   <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:18px;">
     On-demand GPUs from $0.20/hr. Affiliate links — we earn when you sign up.
   </p>
   <div class="provider-grid">
-
-    <!-- RunPod -->
     <a href="https://runpod.io/?ref=gpustars" target="_blank" rel="noopener" class="aff-card aff-card-accent">
       <span class="card-badge badge-affiliate">AFFILIATE · 10%</span>
       <div class="card-name" style="color:var(--accent);">RunPod</div>
@@ -533,8 +598,6 @@
       </div>
       <div class="card-cta cta-accent">Deploy GPU → runpod.io ↗</div>
     </a>
-
-    <!-- Vast.ai -->
     <a href="https://vast.ai/?ref=gpustars" target="_blank" rel="noopener" class="aff-card aff-card-cyan">
       <span class="card-badge badge-affiliate">AFFILIATE</span>
       <div class="card-name" style="color:var(--accent2);">Vast.ai</div>
@@ -547,8 +610,6 @@
       </div>
       <div class="card-cta cta-cyan">Browse GPUs → vast.ai ↗</div>
     </a>
-
-    <!-- Lambda Labs -->
     <a href="https://lambdalabs.com/?ref=gpustars" target="_blank" rel="noopener" class="aff-card aff-card-gold">
       <span class="card-badge badge-affiliate">AFFILIATE</span>
       <div class="card-name" style="color:var(--gold);">Lambda Labs</div>
@@ -561,11 +622,6 @@
       </div>
       <div class="card-cta cta-gold">Launch instance → lambdalabs.com ↗</div>
     </a>
-
-  </div>
-
-
-    <!-- TensorDock -->
     <a href="https://marketplace.tensordock.com/deploy" target="_blank" rel="noopener" class="aff-card aff-card-cyan">
       <span class="card-badge badge-affiliate">MARKETPLACE</span>
       <div class="card-name" style="color:var(--accent2);">TensorDock</div>
@@ -578,8 +634,6 @@
       </div>
       <div class="card-cta cta-cyan">Deploy now → tensordock.com ↗</div>
     </a>
-
-    <!-- DataCrunch -->
     <a href="https://datacrunch.io" target="_blank" rel="noopener" class="aff-card aff-card-accent">
       <span class="card-badge badge-affiliate">GREEN CLOUD</span>
       <div class="card-name" style="color:var(--accent);">DataCrunch</div>
@@ -592,18 +646,14 @@
       </div>
       <div class="card-cta cta-accent">Try now → datacrunch.io ↗</div>
     </a>
+  </div>
 
-
-  <!-- ═══════════════════════════════════════════ -->
-  <!--   ENTERPRISE GPU CLOUD                     -->
-  <!-- ═══════════════════════════════════════════ -->
+  <!-- ENTERPRISE GPU CLOUD -->
   <div class="section-title">Enterprise GPU Cloud</div>
   <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:18px;">
     Dedicated clusters · InfiniBand fabric · SLA-backed · Direct sales only.
   </p>
   <div class="provider-grid">
-
-    <!-- CoreWeave -->
     <a href="https://coreweave.com" target="_blank" rel="noopener" class="aff-card aff-card-muted">
       <span class="card-badge badge-enterprise">ENTERPRISE</span>
       <div class="card-name" style="color:var(--text);">CoreWeave</div>
@@ -616,8 +666,6 @@
       </div>
       <div class="card-cta cta-muted">Contact sales → coreweave.com</div>
     </a>
-
-    <!-- Crusoe -->
     <a href="https://crusoecloud.com" target="_blank" rel="noopener" class="aff-card aff-card-muted">
       <span class="card-badge badge-enterprise">ENTERPRISE</span>
       <div class="card-name" style="color:var(--text);">Crusoe</div>
@@ -630,8 +678,6 @@
       </div>
       <div class="card-cta cta-muted">Contact sales → crusoecloud.com</div>
     </a>
-
-    <!-- Modal Labs -->
     <a href="https://modal.com" target="_blank" rel="noopener" class="aff-card aff-card-muted">
       <span class="card-badge badge-enterprise">DEVELOPER</span>
       <div class="card-name" style="color:var(--text);">Modal Labs</div>
@@ -644,19 +690,14 @@
       </div>
       <div class="card-cta cta-muted">Get started → modal.com</div>
     </a>
-
   </div>
 
-  <!-- ═══════════════════════════════════════════ -->
-  <!--   HYPERSCALERS                             -->
-  <!-- ═══════════════════════════════════════════ -->
+  <!-- HYPERSCALERS -->
   <div class="section-title">Hyperscalers</div>
   <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:18px;">
     Global infrastructure · Enterprise SLA · Compliance frameworks · Contact sales for GPU clusters.
   </p>
   <div class="provider-grid">
-
-    <!-- AWS -->
     <a href="https://aws.amazon.com/ec2/instance-types/p5/" target="_blank" rel="noopener" class="aff-card aff-card-muted">
       <span class="card-badge badge-hyperscaler">HYPERSCALER</span>
       <div class="card-name" style="color:var(--text);">AWS (P5)</div>
@@ -669,8 +710,6 @@
       </div>
       <div class="card-cta cta-muted">aws.amazon.com/ec2/p5</div>
     </a>
-
-    <!-- GCP -->
     <a href="https://cloud.google.com/gpu" target="_blank" rel="noopener" class="aff-card aff-card-muted">
       <span class="card-badge badge-hyperscaler">HYPERSCALER</span>
       <div class="card-name" style="color:var(--text);">Google Cloud</div>
@@ -683,8 +722,6 @@
       </div>
       <div class="card-cta cta-muted">cloud.google.com/gpu</div>
     </a>
-
-    <!-- Azure -->
     <a href="https://azure.microsoft.com/products/virtual-machines/nd-series" target="_blank" rel="noopener" class="aff-card aff-card-muted">
       <span class="card-badge badge-hyperscaler">HYPERSCALER</span>
       <div class="card-name" style="color:var(--text);">Azure</div>
@@ -697,8 +734,6 @@
       </div>
       <div class="card-cta cta-muted">azure.microsoft.com</div>
     </a>
-
-    <!-- Oracle -->
     <a href="https://www.oracle.com/cloud/compute/gpu/" target="_blank" rel="noopener" class="aff-card aff-card-muted">
       <span class="card-badge badge-hyperscaler">HYPERSCALER</span>
       <div class="card-name" style="color:var(--text);">Oracle Cloud</div>
@@ -711,24 +746,18 @@
       </div>
       <div class="card-cta cta-muted">oracle.com/cloud/gpu</div>
     </a>
-
   </div>
 
-  <!-- ═══════════════════════════════════════════ -->
-  <!--   INFRASTRUCTURE PARTNERS                  -->
-  <!-- ═══════════════════════════════════════════ -->
+  <!-- INFRASTRUCTURE PARTNERS -->
   <div class="section-title">Infrastructure Partners</div>
   <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:18px;">
     We run our own infrastructure on these providers. No sponsorship — just what works.
   </p>
   <div class="provider-grid">
-
-    <!-- Alastyr -->
     <a href="/go/hosting" target="_blank" rel="noopener" class="aff-card aff-card-accent">
       <span class="card-badge badge-used">USED BY GPUSTARS</span>
       <div style="display:flex;align-items:center;gap:10px;margin-top:8px;margin-bottom:4px;">
-        <img src="assets/alastyr-logo.jpeg" alt="Alastyr"
-          style="width:32px;height:32px;object-fit:contain;border-radius:3px;background:#fff;padding:2px;"/>
+        <img src="assets/alastyr-logo.jpeg" alt="Alastyr" style="width:32px;height:32px;object-fit:contain;border-radius:3px;background:#fff;padding:2px;"/>
         <div class="card-name" style="color:var(--accent);margin-top:0;">Alastyr</div>
       </div>
       <div class="card-sub">Web Solutions</div>
@@ -740,13 +769,10 @@
       </div>
       <div class="card-cta cta-accent">Get started → gpustars.com/go/hosting ↗</div>
     </a>
-
-    <!-- 1ADATA -->
     <div class="aff-card aff-card-accent" style="cursor:default;">
       <span class="card-badge badge-partner">ECOSYSTEM PARTNER</span>
       <div style="display:flex;align-items:center;gap:10px;margin-top:8px;margin-bottom:4px;">
-        <img src="assets/1adata_logo.jpg" alt="1ADATA"
-          style="width:32px;height:32px;object-fit:contain;border-radius:3px;background:#fff;padding:2px;"/>
+        <img src="assets/1adata_logo.jpg" alt="1ADATA" style="width:32px;height:32px;object-fit:contain;border-radius:3px;background:#fff;padding:2px;"/>
         <div class="card-name" style="color:var(--accent);margin-top:0;">1ADATA</div>
       </div>
       <div class="card-sub" style="color:var(--accent2);opacity:0.8;">Enables Digital Security</div>
@@ -758,7 +784,6 @@
       </div>
       <div class="card-cta" style="color:var(--accent2);opacity:0.7;">1ADATA · Enables Digital Security</div>
     </div>
-
   </div>
 
   <footer>
@@ -772,35 +797,144 @@
 </div>
 
 <script>
+// ═══════════════════════════════════════════
+// THEME TOGGLE
+// ═══════════════════════════════════════════
+const root = document.documentElement;
+const toggleBtn = document.getElementById('theme-toggle');
+const iconDark = document.getElementById('icon-dark');
+const iconLight = document.getElementById('icon-light');
+
+function applyTheme(theme) {
+  if (theme === 'light') {
+    root.classList.add('light');
+    iconDark.classList.remove('active');
+    iconLight.classList.add('active');
+  } else {
+    root.classList.remove('light');
+    iconDark.classList.add('active');
+    iconLight.classList.remove('active');
+  }
+  try { localStorage.setItem('gpustars-theme', theme); } catch(e) {}
+}
+
+let savedTheme = 'dark';
+try { savedTheme = localStorage.getItem('gpustars-theme') || 'dark'; } catch(e) {}
+applyTheme(savedTheme);
+
+toggleBtn.addEventListener('click', () => {
+  applyTheme(root.classList.contains('light') ? 'dark' : 'light');
+});
+
+// ═══════════════════════════════════════════
+// DATA & STATE
+// ═══════════════════════════════════════════
 let allData = { cloud: [], local: [] };
 let currentFilter = 'all';
 let sortCol = 'composite';
 let sortDir = 'desc';
+let currentTopCat = 'overall';
 
-async function loadData() {
-  try {
-    const r = await fetch('data/report.json?v=' + Date.now());
-    const data = await r.json();
-    allData = data;
-    render(data);
-  } catch(e) {
-    document.getElementById('model-tbody').innerHTML =
-      '<tr><td colspan="8"><div class="error-msg">Failed to load data: ' + e.message + '</div></td></tr>';
-  }
+// ═══════════════════════════════════════════
+// TOP RATED PROVIDER BANNER
+// ═══════════════════════════════════════════
+function speedScore(m) {
+  // Derive speed score from latency: lower latency = higher score
+  if (m.latency_s == null) return 0;
+  if (m.latency_s <= 0.8) return 10;
+  if (m.latency_s <= 1.5) return 8;
+  if (m.latency_s <= 2.5) return 6;
+  if (m.latency_s <= 4.0) return 4;
+  return 2;
 }
 
+function qualityScore(m) {
+  // Use turkce_score + composite as quality proxy
+  return m.quality_score ?? (m.composite ? Math.min(10, m.composite * 1.2) : 0);
+}
+
+function valueScore(m) {
+  if (!m.blended || m.blended <= 0) return m.composite || 0;
+  return (m.composite || 0) / m.blended;
+}
+
+function getBestFor(cat, cloud) {
+  if (!cloud || cloud.length === 0) return null;
+  const sorted = [...cloud].sort((a, b) => {
+    if (cat === 'overall') return (b.composite || 0) - (a.composite || 0);
+    if (cat === 'speed') return speedScore(b) - speedScore(a);
+    if (cat === 'quality') return qualityScore(b) - qualityScore(a);
+    if (cat === 'value') return valueScore(b) - valueScore(a);
+    if (cat === 'turkish') return (b.turkce_score || 0) - (a.turkce_score || 0);
+    return 0;
+  });
+  return sorted[0];
+}
+
+function renderTopProvider(cat, cloud) {
+  const m = getBestFor(cat, cloud);
+  if (!m) return;
+
+  const name = modelShortName(m.model);
+  document.getElementById('tp-model').innerHTML =
+    `<span class="ptag">${m.provider}</span>${name}`;
+
+  let sub = '';
+  if (cat === 'overall') sub = 'Highest composite score across all criteria';
+  else if (cat === 'speed') sub = 'Lowest latency · Fastest response time';
+  else if (cat === 'quality') sub = 'Best benchmark quality score';
+  else if (cat === 'value') sub = 'Best quality-to-price ratio';
+  else if (cat === 'turkish') sub = 'Highest Turkish language score';
+  document.getElementById('tp-sub').textContent = sub;
+
+  const latStr = m.latency_s != null ? m.latency_s + 's' : '—';
+  const spd = speedScore(m);
+  const spdClass = spd >= 8 ? 'latency-ok' : spd >= 5 ? 'latency-slow' : 'latency-fail';
+
+  document.getElementById('tp-metrics').innerHTML = `
+    <div class="tpm">
+      <div class="tv">${(m.composite || 0).toFixed(2)}</div>
+      <div class="tl">Composite</div>
+    </div>
+    <div class="tpm">
+      <div class="tv" style="color:var(--accent2);">${latStr}</div>
+      <div class="tl">Latency</div>
+    </div>
+    <div class="tpm">
+      <div class="tv">${m.blended > 0 ? '$' + m.blended.toFixed(3) : 'Free'}</div>
+      <div class="tl">Per 1M tok</div>
+    </div>
+    <div class="tpm">
+      <div class="tv" style="color:var(--gold);">${m.turkce_score ?? '—'}</div>
+      <div class="tl">Turkish</div>
+    </div>
+    <div class="tpm">
+      <div class="tv">${formatCtx(m.ctx)}</div>
+      <div class="tl">Context</div>
+    </div>
+  `;
+
+  setTimeout(() => document.getElementById('top-provider-strip').classList.add('visible'), 100);
+}
+
+// Tab switching
+document.getElementById('top-tabs').addEventListener('click', e => {
+  const tab = e.target.closest('.top-provider-tab');
+  if (!tab) return;
+  document.querySelectorAll('.top-provider-tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  currentTopCat = tab.dataset.cat;
+  renderTopProvider(currentTopCat, allData.cloud);
+});
+
+// ═══════════════════════════════════════════
+// UTILITIES
+// ═══════════════════════════════════════════
 function formatCtx(ctx) {
   if (!ctx) return '—';
   if (ctx >= 1000000) return (ctx/1000000).toFixed(0) + 'M';
   if (ctx >= 1000) return (ctx/1000).toFixed(0) + 'K';
   return ctx;
-}
-
-function latencyClass(s) {
-  if (s == null) return 'latency-fail';
-  if (s <= 1.5) return 'latency-ok';
-  if (s <= 3.0) return 'latency-slow';
-  return 'latency-fail';
 }
 
 function modelShortName(full) {
@@ -814,46 +948,9 @@ function providerBadge(p) {
   return 'badge-local';
 }
 
-function render(data) {
-  if (data.generated_at) {
-    const d = new Date(data.generated_at);
-    document.getElementById('updated-time').textContent =
-      'Updated ' + d.toLocaleDateString('en-GB', {day:'2-digit',month:'short',year:'numeric'}) +
-      ' ' + d.toLocaleTimeString('en-GB', {hour:'2-digit',minute:'2-digit'});
-  }
-
-  const best = data.best_cloud;
-  if (best) {
-    document.getElementById('winner-name').innerHTML =
-      `<span class="provider-tag">${best.provider}</span>${modelShortName(best.model)}`;
-    document.getElementById('winner-scores').innerHTML = `
-      <div class="winner-score-item">
-        <div class="val">${best.composite?.toFixed(2) ?? '—'}</div>
-        <div class="lbl">Composite</div>
-      </div>
-      <div class="winner-score-item">
-        <div class="val">$${best.blended?.toFixed(3) ?? '—'}</div>
-        <div class="lbl">Per 1M tok</div>
-      </div>
-      <div class="winner-score-item">
-        <div class="val">${best.latency_s != null ? best.latency_s + 's' : '—'}</div>
-        <div class="lbl">Latency</div>
-      </div>
-      <div class="winner-score-item">
-        <div class="val">${best.turkce_score ?? '—'}</div>
-        <div class="lbl">Turkish</div>
-      </div>
-    `;
-    setTimeout(() => document.getElementById('winner-banner').classList.add('visible'), 100);
-  }
-
-  renderTable(data.cloud || []);
-  renderLocal(data.local || []);
-
-  const total = (data.cloud?.length || 0) + (data.local?.length || 0);
-  document.getElementById('model-count').textContent = total + ' models tracked';
-}
-
+// ═══════════════════════════════════════════
+// RENDER TABLE — with Quality + Speed cols
+// ═══════════════════════════════════════════
 function renderTable(cloud) {
   let filtered = cloud;
   if (currentFilter !== 'all' && currentFilter !== 'local') {
@@ -861,8 +958,15 @@ function renderTable(cloud) {
   }
 
   filtered = [...filtered].sort((a, b) => {
-    let av = a[sortCol] ?? -Infinity;
-    let bv = b[sortCol] ?? -Infinity;
+    let av, bv;
+    if (sortCol === 'quality_score') {
+      av = qualityScore(a); bv = qualityScore(b);
+    } else if (sortCol === 'speed_score') {
+      av = speedScore(a); bv = speedScore(b);
+    } else {
+      av = a[sortCol] ?? -Infinity;
+      bv = b[sortCol] ?? -Infinity;
+    }
     if (typeof av === 'string') av = av.toLowerCase();
     if (typeof bv === 'string') bv = bv.toLowerCase();
     if (av < bv) return sortDir === 'asc' ? -1 : 1;
@@ -875,10 +979,19 @@ function renderTable(cloud) {
 
   tbody.innerHTML = filtered.map((m, i) => {
     const barPct = maxScore > 0 ? ((m.composite || 0) / maxScore * 100).toFixed(1) : 0;
-    const latStr = m.latency_s != null ? m.latency_s + 's' : (m.latency_status || '—');
-    const lClass = latencyClass(m.latency_s);
     const rowClass = i === 0 ? 'rank-1' : '';
     const delay = (i * 0.05).toFixed(2);
+
+    // Speed pill
+    const spd = speedScore(m);
+    const latStr = m.latency_s != null ? m.latency_s + 's' : (m.latency_status || '—');
+    let speedPillClass = 'pill-speed-bad';
+    if (spd >= 8) speedPillClass = 'pill-speed';
+    else if (spd >= 5) speedPillClass = 'pill-speed-slow';
+
+    // Quality pill
+    const qual = qualityScore(m);
+    const qualStr = qual > 0 ? qual.toFixed(1) : '—';
 
     return `<tr class="${rowClass}" style="animation-delay:${delay}s">
       <td class="rank">${i === 0 ? '★' : i + 1}</td>
@@ -890,8 +1003,9 @@ function renderTable(cloud) {
           <span class="score-val">${(m.composite || 0).toFixed(2)}</span>
         </div>
       </td>
+      <td><span class="score-pill pill-quality">✦ ${qualStr}</span></td>
+      <td><span class="score-pill ${speedPillClass}">⚡ ${latStr}</span></td>
       <td class="price-val">${m.blended > 0 ? '$' + m.blended.toFixed(3) : 'Free'}</td>
-      <td class="latency-val ${lClass}">${latStr}</td>
       <td class="score-val">${m.turkce_score ?? '—'}</td>
       <td class="ctx-val">${formatCtx(m.ctx)}</td>
     </tr>`;
@@ -921,6 +1035,37 @@ function renderLocal(local) {
   `).join('');
 }
 
+// ═══════════════════════════════════════════
+// LOAD DATA
+// ═══════════════════════════════════════════
+async function loadData() {
+  try {
+    const r = await fetch('data/report.json?v=' + Date.now());
+    const data = await r.json();
+    allData = data;
+
+    if (data.generated_at) {
+      const d = new Date(data.generated_at);
+      document.getElementById('updated-time').textContent =
+        'Updated ' + d.toLocaleDateString('en-GB', {day:'2-digit',month:'short',year:'numeric'}) +
+        ' ' + d.toLocaleTimeString('en-GB', {hour:'2-digit',minute:'2-digit'});
+    }
+
+    renderTopProvider(currentTopCat, data.cloud || []);
+    renderTable(data.cloud || []);
+    renderLocal(data.local || []);
+
+    const total = (data.cloud?.length || 0) + (data.local?.length || 0);
+    document.getElementById('model-count').textContent = total + ' models tracked';
+  } catch(e) {
+    document.getElementById('model-tbody').innerHTML =
+      '<tr><td colspan="9"><div class="error-msg">Failed to load data: ' + e.message + '</div></td></tr>';
+  }
+}
+
+// ═══════════════════════════════════════════
+// EVENT LISTENERS
+// ═══════════════════════════════════════════
 document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
