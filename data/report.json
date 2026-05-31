@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-31T03:00:31.524081",
+  "generated_at": "2026-05-31T17:17:47.899234",
   "local": [
     {
       "provider": "Mac Studio (Local)",
@@ -53,6 +53,26 @@
   "cloud": [
     {
       "provider": "DeepInfra",
+      "model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+      "input": 0.071,
+      "output": 0.1,
+      "blended": 0.0855,
+      "ctx": 262144,
+      "privacy": "Cloud",
+      "note": "Canli fiyat",
+      "latency_s": 2.36,
+      "latency_status": "ok",
+      "price_score": 10.0,
+      "latency_score": 8.64,
+      "quality_score": 8.67,
+      "reliability_score": 8.0,
+      "fail_score": 8.0,
+      "turkce_score": 9.0,
+      "arena_elo": 1350,
+      "composite": 9.13
+    },
+    {
+      "provider": "DeepInfra",
       "model": "Qwen/Qwen2.5-72B-Instruct",
       "input": 0.36,
       "output": 0.4,
@@ -60,16 +80,56 @@
       "ctx": 32768,
       "privacy": "Cloud",
       "note": "Canli fiyat",
-      "latency_s": 2.36,
+      "latency_s": 1.15,
       "latency_status": "ok",
       "price_score": 9.16,
-      "latency_score": 8.64,
+      "latency_score": 9.85,
       "quality_score": 7.75,
       "reliability_score": 8.5,
       "fail_score": 8.5,
       "turkce_score": 8.5,
       "arena_elo": 1280,
-      "composite": 8.47
+      "composite": 8.77
+    },
+    {
+      "provider": "DeepInfra",
+      "model": "meta-llama/Llama-3.3-70B-Instruct-Turbo",
+      "input": 0.1,
+      "output": 0.32,
+      "blended": 0.21,
+      "ctx": 131072,
+      "privacy": "Cloud",
+      "note": "Canli fiyat",
+      "latency_s": 0.75,
+      "latency_status": "ok",
+      "price_score": 9.65,
+      "latency_score": 10.0,
+      "quality_score": 7.0,
+      "reliability_score": 8.5,
+      "fail_score": 8.5,
+      "turkce_score": 7.0,
+      "arena_elo": 1256,
+      "composite": 8.68
+    },
+    {
+      "provider": "DeepInfra",
+      "model": "meta-llama/Meta-Llama-3.1-70B-Instruct",
+      "input": 0.4,
+      "output": 0.4,
+      "blended": 0.4,
+      "ctx": 131072,
+      "privacy": "Cloud",
+      "note": "Canli fiyat",
+      "latency_s": 0.75,
+      "latency_status": "ok",
+      "price_score": 9.11,
+      "latency_score": 10.0,
+      "quality_score": 6.89,
+      "reliability_score": 8.5,
+      "fail_score": 8.5,
+      "turkce_score": 7.0,
+      "arena_elo": 1247,
+      "composite": 8.44
     },
     {
       "provider": "DeepInfra",
@@ -80,7 +140,7 @@
       "ctx": 131072,
       "privacy": "Cloud",
       "note": "Canli fiyat",
-      "latency_s": 0.7,
+      "latency_s": 0.71,
       "latency_status": "ok",
       "price_score": 8.11,
       "latency_score": 10.0,
@@ -92,26 +152,6 @@
       "composite": 8.31
     },
     {
-      "provider": "DeepInfra",
-      "model": "meta-llama/Llama-3.3-70B-Instruct-Turbo",
-      "input": 0.1,
-      "output": 0.32,
-      "blended": 0.21,
-      "ctx": 131072,
-      "privacy": "Cloud",
-      "note": "Canli fiyat",
-      "latency_s": 2.59,
-      "latency_status": "ok",
-      "price_score": 9.65,
-      "latency_score": 8.41,
-      "quality_score": 7.0,
-      "reliability_score": 8.5,
-      "fail_score": 8.5,
-      "turkce_score": 7.0,
-      "arena_elo": 1256,
-      "composite": 8.28
-    },
-    {
       "provider": "Together.ai",
       "model": "MiniMaxAI/MiniMax-M2.7",
       "input": 0.3,
@@ -119,7 +159,7 @@
       "blended": 0.75,
       "privacy": "Cloud",
       "note": "Canli fiyat",
-      "latency_s": 0.69,
+      "latency_s": 0.67,
       "latency_status": "ok",
       "price_score": 8.11,
       "latency_score": 10.0,
@@ -138,16 +178,16 @@
       "blended": 0.3,
       "privacy": "Cloud",
       "note": "Canli fiyat",
-      "latency_s": 1.29,
+      "latency_s": 1.36,
       "latency_status": "ok",
       "price_score": 9.39,
-      "latency_score": 9.71,
+      "latency_score": 9.64,
       "quality_score": 5.58,
       "reliability_score": 8.0,
       "fail_score": 8.0,
       "turkce_score": 7.0,
       "arena_elo": 1150,
-      "composite": 7.95
+      "composite": 7.93
     },
     {
       "provider": "Together.ai",
@@ -157,56 +197,16 @@
       "blended": 1.04,
       "privacy": "Cloud",
       "note": "Canli fiyat",
-      "latency_s": 0.42,
+      "latency_s": 1.34,
       "latency_status": "ok",
       "price_score": 7.29,
-      "latency_score": 10.0,
+      "latency_score": 9.66,
       "quality_score": 7.0,
       "reliability_score": 8.5,
       "fail_score": 8.5,
       "turkce_score": 7.0,
       "arena_elo": 1256,
-      "composite": 7.85
-    },
-    {
-      "provider": "DeepInfra",
-      "model": "meta-llama/Meta-Llama-3.1-70B-Instruct",
-      "input": 0.4,
-      "output": 0.4,
-      "blended": 0.4,
-      "ctx": 131072,
-      "privacy": "Cloud",
-      "note": "Canli fiyat",
-      "latency_s": 3.9,
-      "latency_status": "ok",
-      "price_score": 9.11,
-      "latency_score": 7.1,
-      "quality_score": 6.89,
-      "reliability_score": 8.5,
-      "fail_score": 8.5,
-      "turkce_score": 7.0,
-      "arena_elo": 1247,
-      "composite": 7.72
-    },
-    {
-      "provider": "DeepInfra",
-      "model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
-      "input": 0.071,
-      "output": 0.1,
-      "blended": 0.0855,
-      "ctx": 262144,
-      "privacy": "Cloud",
-      "note": "Canli fiyat",
-      "latency_s": null,
-      "latency_status": "http_429",
-      "price_score": 10.0,
-      "latency_score": 3.0,
-      "quality_score": 8.67,
-      "reliability_score": 8.0,
-      "fail_score": 8.0,
-      "turkce_score": 9.0,
-      "arena_elo": 1350,
-      "composite": 7.72
+      "composite": 7.77
     },
     {
       "provider": "Together.ai",
@@ -235,43 +235,86 @@
       "blended": 3.25,
       "privacy": "Cloud",
       "note": "Canli fiyat",
-      "latency_s": null,
-      "latency_status": "timeout",
+      "latency_s": 1.49,
+      "latency_status": "ok",
       "price_score": 1.0,
-      "latency_score": 3.0,
+      "latency_score": 9.51,
       "quality_score": 8.75,
       "reliability_score": 8.0,
       "fail_score": 8.0,
       "turkce_score": 8.0,
       "arena_elo": 1380,
-      "composite": 4.6
+      "composite": 6.23
     }
   ],
   "best_cloud": {
     "provider": "DeepInfra",
-    "model": "Qwen/Qwen2.5-72B-Instruct",
-    "input": 0.36,
-    "output": 0.4,
-    "blended": 0.38,
-    "ctx": 32768,
+    "model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+    "input": 0.071,
+    "output": 0.1,
+    "blended": 0.0855,
+    "ctx": 262144,
     "privacy": "Cloud",
     "note": "Canli fiyat",
     "latency_s": 2.36,
     "latency_status": "ok",
-    "price_score": 9.16,
+    "price_score": 10.0,
     "latency_score": 8.64,
-    "quality_score": 7.75,
-    "reliability_score": 8.5,
-    "fail_score": 8.5,
-    "turkce_score": 8.5,
-    "arena_elo": 1280,
-    "composite": 8.47
+    "quality_score": 8.67,
+    "reliability_score": 8.0,
+    "fail_score": 8.0,
+    "turkce_score": 9.0,
+    "arena_elo": 1350,
+    "composite": 9.13
   },
-  "tensordock_gpus": [],
+  "tensordock_gpus": [
+    {
+      "provider": "TensorDock",
+      "model": "rtxa4000-pcie-16gb",
+      "price_per_hr": 0.07,
+      "vram_gb": 16
+    },
+    {
+      "provider": "TensorDock",
+      "model": "geforcertx3070ti-pcie-8gb",
+      "price_per_hr": 0.12,
+      "vram_gb": 8
+    },
+    {
+      "provider": "TensorDock",
+      "model": "geforcertx3090-pcie-24gb",
+      "price_per_hr": 0.2,
+      "vram_gb": 24
+    },
+    {
+      "provider": "TensorDock",
+      "model": "rtxa6000-pcie-48gb",
+      "price_per_hr": 0.39,
+      "vram_gb": 48
+    },
+    {
+      "provider": "TensorDock",
+      "model": "geforcertx4090-pcie-24gb",
+      "price_per_hr": 0.48,
+      "vram_gb": 24
+    },
+    {
+      "provider": "TensorDock",
+      "model": "geforcertx5090-pcie-32gb",
+      "price_per_hr": 0.64,
+      "vram_gb": 32
+    },
+    {
+      "provider": "TensorDock",
+      "model": "a100-sxm4-80gb",
+      "price_per_hr": 0.85,
+      "vram_gb": 80
+    }
+  ],
   "summary": {
     "total_models": 14,
     "cloud_providers": 2,
     "cheapest": "Qwen/Qwen3-235B-A22B-Instruct-2507",
-    "highest_composite": "Qwen/Qwen2.5-72B-Instruct"
+    "highest_composite": "Qwen/Qwen3-235B-A22B-Instruct-2507"
   }
 }
