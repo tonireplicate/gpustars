@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-04T03:00:15.823807",
+  "generated_at": "2026-06-05T03:00:20.925330",
   "local": [
     {
       "provider": "Mac Studio (Local)",
@@ -20,6 +20,18 @@
       "output": 0.0,
       "blended": 0.0,
       "size_gb": 4.9,
+      "privacy": "Tam local",
+      "ctx": 32768,
+      "composite": 9.5,
+      "note": "Local - fiyat yok, gizlilik tam"
+    },
+    {
+      "provider": "Mac Studio (Local)",
+      "model": "mistral-small3.1:latest",
+      "input": 0.0,
+      "output": 0.0,
+      "blended": 0.0,
+      "size_gb": 15.5,
       "privacy": "Tam local",
       "ctx": 32768,
       "composite": 9.5,
@@ -60,18 +72,6 @@
       "ctx": 32768,
       "composite": 9.5,
       "note": "Local - fiyat yok, gizlilik tam"
-    },
-    {
-      "provider": "Mac Studio (Local)",
-      "model": "mistral-small3.1:latest",
-      "input": 0.0,
-      "output": 0.0,
-      "blended": 0.0,
-      "size_gb": 15.5,
-      "privacy": "Tam local",
-      "ctx": 32768,
-      "composite": 9.5,
-      "note": "Local - fiyat yok, gizlilik tam"
     }
   ],
   "cloud": [
@@ -84,7 +84,7 @@
       "ctx": 262144,
       "privacy": "Cloud",
       "note": "Canli fiyat",
-      "latency_s": 0.69,
+      "latency_s": 0.8,
       "latency_status": "ok",
       "price_score": 10.0,
       "latency_score": 10.0,
@@ -104,76 +104,16 @@
       "ctx": 32768,
       "privacy": "Cloud",
       "note": "Canli fiyat",
-      "latency_s": 1.68,
+      "latency_s": 0.78,
       "latency_status": "ok",
       "price_score": 9.16,
-      "latency_score": 9.32,
+      "latency_score": 10.0,
       "quality_score": 7.75,
       "reliability_score": 8.5,
       "fail_score": 8.5,
       "turkce_score": 8.5,
       "arena_elo": 1280,
-      "composite": 8.64
-    },
-    {
-      "provider": "DeepInfra",
-      "model": "meta-llama/Llama-3.3-70B-Instruct-Turbo",
-      "input": 0.1,
-      "output": 0.32,
-      "blended": 0.21,
-      "ctx": 131072,
-      "privacy": "Cloud",
-      "note": "Canli fiyat",
-      "latency_s": 1.49,
-      "latency_status": "ok",
-      "price_score": 9.65,
-      "latency_score": 9.51,
-      "quality_score": 7.0,
-      "reliability_score": 8.5,
-      "fail_score": 8.5,
-      "turkce_score": 7.0,
-      "arena_elo": 1256,
-      "composite": 8.55
-    },
-    {
-      "provider": "DeepInfra",
-      "model": "meta-llama/Meta-Llama-3.1-70B-Instruct",
-      "input": 0.4,
-      "output": 0.4,
-      "blended": 0.4,
-      "ctx": 131072,
-      "privacy": "Cloud",
-      "note": "Canli fiyat",
-      "latency_s": 0.76,
-      "latency_status": "ok",
-      "price_score": 9.11,
-      "latency_score": 10.0,
-      "quality_score": 6.89,
-      "reliability_score": 8.5,
-      "fail_score": 8.5,
-      "turkce_score": 7.0,
-      "arena_elo": 1247,
-      "composite": 8.44
-    },
-    {
-      "provider": "DeepInfra",
-      "model": "deepseek-ai/DeepSeek-R1-Distill-Llama-70B",
-      "input": 0.7,
-      "output": 0.8,
-      "blended": 0.75,
-      "ctx": 131072,
-      "privacy": "Cloud",
-      "note": "Canli fiyat",
-      "latency_s": 0.73,
-      "latency_status": "ok",
-      "price_score": 8.11,
-      "latency_score": 10.0,
-      "quality_score": 7.43,
-      "reliability_score": 8.0,
-      "fail_score": 8.0,
-      "turkce_score": 6.5,
-      "arena_elo": 1310,
-      "composite": 8.31
+      "composite": 8.81
     },
     {
       "provider": "Together.ai",
@@ -183,7 +123,7 @@
       "blended": 0.75,
       "privacy": "Cloud",
       "note": "Canli fiyat",
-      "latency_s": 0.72,
+      "latency_s": 0.5,
       "latency_status": "ok",
       "price_score": 8.11,
       "latency_score": 10.0,
@@ -195,6 +135,26 @@
       "composite": 8.25
     },
     {
+      "provider": "DeepInfra",
+      "model": "meta-llama/Llama-3.3-70B-Instruct-Turbo",
+      "input": 0.1,
+      "output": 0.32,
+      "blended": 0.21,
+      "ctx": 131072,
+      "privacy": "Cloud",
+      "note": "Canli fiyat",
+      "latency_s": 4.02,
+      "latency_status": "ok",
+      "price_score": 9.65,
+      "latency_score": 6.98,
+      "quality_score": 7.0,
+      "reliability_score": 8.5,
+      "fail_score": 8.5,
+      "turkce_score": 7.0,
+      "arena_elo": 1256,
+      "composite": 7.92
+    },
+    {
       "provider": "Together.ai",
       "model": "Qwen/Qwen2.5-7B-Instruct-Turbo",
       "input": 0.3,
@@ -202,16 +162,16 @@
       "blended": 0.3,
       "privacy": "Cloud",
       "note": "Canli fiyat",
-      "latency_s": 1.04,
+      "latency_s": 1.61,
       "latency_status": "ok",
       "price_score": 9.39,
-      "latency_score": 9.96,
+      "latency_score": 9.39,
       "quality_score": 5.58,
       "reliability_score": 8.0,
       "fail_score": 8.0,
       "turkce_score": 7.0,
       "arena_elo": 1150,
-      "composite": 8.01
+      "composite": 7.87
     },
     {
       "provider": "Together.ai",
@@ -221,16 +181,16 @@
       "blended": 1.04,
       "privacy": "Cloud",
       "note": "Canli fiyat",
-      "latency_s": 0.79,
+      "latency_s": 2.14,
       "latency_status": "ok",
       "price_score": 7.29,
-      "latency_score": 10.0,
+      "latency_score": 8.86,
       "quality_score": 7.0,
       "reliability_score": 8.5,
       "fail_score": 8.5,
       "turkce_score": 7.0,
       "arena_elo": 1256,
-      "composite": 7.85
+      "composite": 7.57
     },
     {
       "provider": "Together.ai",
@@ -240,7 +200,7 @@
       "blended": 2.1,
       "privacy": "Cloud",
       "note": "Canli fiyat",
-      "latency_s": 0.66,
+      "latency_s": 0.62,
       "latency_status": "ok",
       "price_score": 4.27,
       "latency_score": 10.0,
@@ -259,16 +219,16 @@
       "blended": 3.25,
       "privacy": "Cloud",
       "note": "Canli fiyat",
-      "latency_s": 1.38,
+      "latency_s": 4.11,
       "latency_status": "ok",
       "price_score": 1.0,
-      "latency_score": 9.62,
+      "latency_score": 6.89,
       "quality_score": 8.75,
       "reliability_score": 8.0,
       "fail_score": 8.0,
       "turkce_score": 8.0,
       "arena_elo": 1380,
-      "composite": 6.25
+      "composite": 5.57
     }
   ],
   "best_cloud": {
@@ -280,7 +240,7 @@
     "ctx": 262144,
     "privacy": "Cloud",
     "note": "Canli fiyat",
-    "latency_s": 0.69,
+    "latency_s": 0.8,
     "latency_status": "ok",
     "price_score": 10.0,
     "latency_score": 10.0,
@@ -291,130 +251,9 @@
     "arena_elo": 1350,
     "composite": 9.47
   },
-  "tensordock_gpus": [
-    {
-      "provider": "TensorDock",
-      "model": "rtxa4000-pcie-16gb",
-      "price_per_hr": 0.07,
-      "vram_gb": 16
-    },
-    {
-      "provider": "TensorDock",
-      "model": "geforcertx3080ti-pcie-12gb",
-      "price_per_hr": 0.1,
-      "vram_gb": 12
-    },
-    {
-      "provider": "TensorDock",
-      "model": "geforcertx3070ti-pcie-8gb",
-      "price_per_hr": 0.12,
-      "vram_gb": 8
-    },
-    {
-      "provider": "TensorDock",
-      "model": "geforcertx4080-pcie-16gb",
-      "price_per_hr": 0.14,
-      "vram_gb": 16
-    },
-    {
-      "provider": "TensorDock",
-      "model": "geforcertx2060super-pcie-8gb",
-      "price_per_hr": 0.144,
-      "vram_gb": 8
-    },
-    {
-      "provider": "TensorDock",
-      "model": "geforcertx3090-pcie-24gb",
-      "price_per_hr": 0.15,
-      "vram_gb": 24
-    },
-    {
-      "provider": "TensorDock",
-      "model": "v100-sxm2-16gb",
-      "price_per_hr": 0.19,
-      "vram_gb": 16
-    },
-    {
-      "provider": "TensorDock",
-      "model": "rtxa5000-pcie-24gb",
-      "price_per_hr": 0.21,
-      "vram_gb": 24
-    },
-    {
-      "provider": "TensorDock",
-      "model": "l4-pcie-24gb",
-      "price_per_hr": 0.225,
-      "vram_gb": 24
-    },
-    {
-      "provider": "TensorDock",
-      "model": "geforcertx4090-pcie-24gb",
-      "price_per_hr": 0.25,
-      "vram_gb": 24
-    },
-    {
-      "provider": "TensorDock",
-      "model": "quadrortx6000-pcie-48gb",
-      "price_per_hr": 0.3,
-      "vram_gb": 48
-    },
-    {
-      "provider": "TensorDock",
-      "model": "a40-pcie-48gb",
-      "price_per_hr": 0.33,
-      "vram_gb": 48
-    },
-    {
-      "provider": "TensorDock",
-      "model": "rtxa6000-pcie-48gb",
-      "price_per_hr": 0.39,
-      "vram_gb": 48
-    },
-    {
-      "provider": "TensorDock",
-      "model": "rtx5000ada-pcie-32gb",
-      "price_per_hr": 0.55,
-      "vram_gb": 32
-    },
-    {
-      "provider": "TensorDock",
-      "model": "geforcertx5090-pcie-32gb",
-      "price_per_hr": 0.57,
-      "vram_gb": 32
-    },
-    {
-      "provider": "TensorDock",
-      "model": "a100-pcie-40gb",
-      "price_per_hr": 0.6,
-      "vram_gb": 40
-    },
-    {
-      "provider": "TensorDock",
-      "model": "rtx6000ada-pcie-48gb",
-      "price_per_hr": 0.7,
-      "vram_gb": 48
-    },
-    {
-      "provider": "TensorDock",
-      "model": "a100-sxm4-80gb",
-      "price_per_hr": 0.85,
-      "vram_gb": 80
-    },
-    {
-      "provider": "TensorDock",
-      "model": "a100-pcie-80gb",
-      "price_per_hr": 1.25,
-      "vram_gb": 80
-    },
-    {
-      "provider": "TensorDock",
-      "model": "h100-sxm5-80gb",
-      "price_per_hr": 1.99,
-      "vram_gb": 80
-    }
-  ],
+  "tensordock_gpus": [],
   "summary": {
-    "total_models": 16,
+    "total_models": 14,
     "cloud_providers": 2,
     "cheapest": "Qwen/Qwen3-235B-A22B-Instruct-2507",
     "highest_composite": "Qwen/Qwen3-235B-A22B-Instruct-2507"
