@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T03:00:05.432738",
+  "generated_at": "2026-06-23T03:00:04.263915",
   "local": [
     {
       "provider": "Mac Studio (Local)",
@@ -15,11 +15,11 @@
     },
     {
       "provider": "Mac Studio (Local)",
-      "model": "mxbai-embed-large:latest",
+      "model": "qwen2.5:32b",
       "input": 0.0,
       "output": 0.0,
       "blended": 0.0,
-      "size_gb": 0.7,
+      "size_gb": 19.9,
       "privacy": "Tam local",
       "ctx": 32768,
       "composite": 9.5,
@@ -27,11 +27,11 @@
     },
     {
       "provider": "Mac Studio (Local)",
-      "model": "qwen2.5:32b",
+      "model": "mxbai-embed-large:latest",
       "input": 0.0,
       "output": 0.0,
       "blended": 0.0,
-      "size_gb": 19.9,
+      "size_gb": 0.7,
       "privacy": "Tam local",
       "ctx": 32768,
       "composite": 9.5,
